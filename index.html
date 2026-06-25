@@ -1340,7 +1340,13 @@
 
       .content {
         padding: 24px 20px 40px;
+        width: 100%;
         margin-left: 0;
+      }
+
+      .content-shell {
+        width: 100%;
+        margin: 0;
       }
     }
 
@@ -2084,10 +2090,6 @@
               <h2>Аналіз рекламної присутності</h2>
             </div>
 
-            <div class="method-note">
-              Для аналізу рекламної присутності я орієнтувався на видимі оголошення конкурентів у Google Ads Transparency Center, Google Search та візуальних paid-форматах Google. Важливо: Google Ads Transparency Center не показує точні ключові слова, бюджети, ставки або результати кампаній, тому keyword directions нижче — це не підтверджені закуплені ключі, а логічні напрями paid search на основі messaging, лендингів і рекламних креативів.
-            </div>
-
             <div class="presence-grid">
               <article class="presence-item">
                 <div class="presence-head">
@@ -2354,7 +2356,6 @@
 
             <div class="strategy-head">
               <h2>Стратегія запуску Google Ads для COPYMIND</h2>
-              <p>Логіка запуску така: спочатку <strong>Search</strong> перевіряє реальний non-brand попит і якість intent-кластерів, далі доопрацьовуємо <strong>quiz landing</strong>, паралельно тестуємо <strong>Demand Gen / YouTube</strong> креативи, а <strong>PMax</strong> і <strong>App campaigns</strong> підключаємо як окремі контрольовані експерименти.</p>
             </div>
 
             <div class="strategy-stack">
@@ -2376,7 +2377,7 @@
 
 
               <article class="strategy-subblock">
-                <h3>Етапи запуску</h3>
+                <h3>Тестова стратегія запуску</h3>
                 <div class="strategy-table-wrap">
                   <table class="strategy-table">
                     <thead>
@@ -2449,27 +2450,6 @@
                     <p>Brand Search залишаємо окремою невеликою кампанією, якщо вже є брендований попит або користувач бачив інші контакти з COPYMIND.</p>
                   </article>
                 </div>
-                <div class="keyword-label">Мінус-слова</div>
-                <div class="chip-list">
-                  <span class="chip">therapy</span>
-                  <span class="chip">therapist</span>
-                  <span class="chip">psychologist</span>
-                  <span class="chip">psychiatrist</span>
-                  <span class="chip">diagnosis</span>
-                  <span class="chip">medical treatment</span>
-                  <span class="chip">crisis</span>
-                  <span class="chip">hotline</span>
-                  <span class="chip">meditation</span>
-                  <span class="chip">sleep sounds</span>
-                  <span class="chip">AI girlfriend</span>
-                  <span class="chip">AI boyfriend</span>
-                  <span class="chip">NSFW</span>
-                  <span class="chip">free download</span>
-                  <span class="chip">APK</span>
-                  <span class="chip">jobs</span>
-                  <span class="chip">course</span>
-                  <span class="chip">definition</span>
-                </div>
                 <div class="quiz-accent"><strong>Фокус старту:</strong> не масштабування, а перевірка search terms, якості intent-кластерів і собівартості проходження квізу.</div>
               </article>
 
@@ -2539,6 +2519,22 @@
                   </article>
                 </div>
                 <div class="quiz-accent"><strong>Принцип для креативів:</strong> не копіювати конкурентів напряму, а брати з категорії робочі тригери, болі й формати. На першому тесті краще підготувати 6–8 різних підходів і оцінювати їх не лише за CTR / CPC, а й за глибиною проходження квізу, signup rate та purchase intent.</div>
+              </article>
+
+              <article class="strategy-subblock">
+                <h3>Особливості квізу під Search і Demand Gen</h3>
+                <div class="summary-grid">
+                  <article class="summary-card">
+                    <h3>Search traffic</h3>
+                    <p>У Search користувач частіше приходить із уже сформованим наміром: він прямо шукає рішення, формулює проблему або категорію продукту. Тому квіз для такого трафіку може бути коротшим, прямішим і швидше вести до результату.</p>
+                  </article>
+
+                  <article class="summary-card">
+                    <h3>Demand Gen traffic</h3>
+                    <p>У Demand Gen аудиторія зазвичай менш мотивована на вході, бо приходить не з прямого запиту, а з креативу. Тут квіз має сильніше пояснювати цінність продукту, прогрівати користувача і відсіювати менш релевантний трафік ще до result page.</p>
+                  </article>
+                </div>
+                <div class="quiz-accent"><strong>Логіка квізу:</strong> для Search важлива швидка валідація intent, а для Demand Gen — додатковий контекст, прогрів і кваліфікація холоднішої аудиторії.</div>
               </article>
 
               <article class="strategy-subblock">
