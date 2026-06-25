@@ -928,9 +928,9 @@
       background: linear-gradient(135deg, rgba(1, 137, 255, 0.22), rgba(255, 255, 255, 0.05));
       border: 1px solid rgba(1, 137, 255, 0.18);
       color: #ffffff;
-      font-size: 0.74rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-size: 1.06rem;
+      font-weight: 600;
+      letter-spacing: 0;
       flex-shrink: 0;
     }
 
@@ -2349,17 +2349,17 @@
           <article class="strategy-card">
             <div class="strategy-badge">
               <span class="eyebrow-dot"></span>
-              <span>Google Ads Strategy</span>
+              <span>Стратегія запуску</span>
             </div>
 
             <div class="strategy-head">
               <h2>Стратегія запуску Google Ads для COPYMIND</h2>
-                            <p>Послідовна логіка запуску за документом: <strong>Search first</strong> для валідації non-brand попиту, далі <strong>quiz personalization</strong>, потім creative testing у Demand Gen / YouTube, після цього <strong>PMax scaling</strong> і окремий <strong>app experiment</strong>.</p>
+              <p>Логіка запуску така: спочатку <strong>Search</strong> перевіряє реальний non-brand попит і якість intent-кластерів, далі доопрацьовуємо <strong>quiz landing</strong>, паралельно тестуємо <strong>Demand Gen / YouTube</strong> креативи, а <strong>PMax</strong> і <strong>App campaigns</strong> підключаємо як окремі контрольовані експерименти.</p>
             </div>
 
             <div class="strategy-stack">
               <article class="strategy-subblock">
-                <h3>Quiz funnel tracking</h3>
+                <h3>Логіка quiz funnel</h3>
                 <div class="funnel-wrap">
                   <div class="funnel-track">
                     <div class="funnel-step">Ad click</div>
@@ -2369,7 +2369,7 @@
                     <div class="funnel-step">result view</div>
                     <div class="funnel-step">signup</div>
                     <div class="funnel-step">payment</div>
-                    <div class="funnel-step">app install / activation</div>
+                    <div class="funnel-step">app install</div>
                   </div>
                 </div>
               </article>
@@ -2389,33 +2389,33 @@
                     <tbody>
                       <tr>
                         <td>Stage 0</td>
-                        <td>Tracking &amp; funnel setup</td>
-                        <td>Підготувати події, primary / secondary conversions, UTM, conversion value model. Без цього будь-який тест буде нечистим.</td>
+                        <td>Підготовка tracking і funnel setup</td>
+                        <td>Налаштовуємо події, primary / secondary conversions, UTM і conversion value model. Без цього не можна коректно оцінити якість трафіку та економіку воронки.</td>
                       </tr>
                       <tr>
                         <td>Stage 1</td>
-                        <td>Search &amp; Quiz Intent Validation</td>
-                        <td>Основний старт. Тестуємо non-brand Search, intent-кластери і одразу адаптований коротший quiz landing під кожен intent.</td>
+                        <td>Тест Search</td>
+                        <td>Ключовий стартовий етап: тестуємо non-brand Search, intent-кластери і коротший quiz landing під кожен кластер.</td>
                       </tr>
                       <tr>
                         <td>Stage 1B</td>
-                        <td>Demand Gen Creative Hypothesis Test</td>
-                        <td>Паралельно, але з обмеженим бюджетом. Готуємо креативну базу, тестуємо 3–5 гіпотез і порівнюємо, чи потребує холодніший трафік глибшого квізу.</td>
+                        <td>Demand Gen: тест креативних гіпотез</td>
+                        <td>Паралельно меншим бюджетом дивимося на роботу різних креативних гіпотез і масштабуємо ті, що приводять найбільш цільовий трафік у квіз.</td>
                       </tr>
                       <tr>
                         <td>Stage 2</td>
-                        <td>Funnel Iteration Based on Data</td>
-                        <td>Після перших даних покращуємо copy, result page, CTA, порядок питань, сегментацію та слабкі місця квізу.</td>
+                        <td>Ітерації воронки на основі даних</td>
+                        <td>Після перших результатів допрацьовуємо copy, result page, CTA, порядок питань і слабкі місця квізу.</td>
                       </tr>
                       <tr>
                         <td>Stage 3</td>
-                        <td>Controlled PMax Experiment</td>
-                        <td>PMax не як основна валідація, а як контрольований тест масштабування з окремим бюджетом, чіткими conversion goals і окремою оцінкою якості квіз-воронки.</td>
+                        <td>Контрольований експеримент із PMax</td>
+                        <td>PMax використовуємо не для первинної валідації, а як окремий тест масштабування з власним бюджетом і окремою оцінкою якості квіз-воронки.</td>
                       </tr>
                       <tr>
                         <td>Stage 4</td>
-                        <td>App Campaigns</td>
-                        <td>Окремий експеримент, бо там інша воронка: install &rarr; activation &rarr; in-app event / purchase.</td>
+                        <td>App campaigns як окремий експеримент</td>
+                        <td>Це окрема воронка: install &rarr; activation &rarr; in-app event / purchase, тому її не варто змішувати з web quiz flow на етапі первинної валідації.</td>
                       </tr>
                     </tbody>
                   </table>
@@ -2423,33 +2423,33 @@
               </article>
 
               <article class="strategy-subblock">
-                <h3>Search campaign structure</h3>
+                <h3>Структура Search-кампаній</h3>
                 <div class="campaign-grid">
                   <article class="campaign-card">
                     <div class="campaign-top">
-                      <div class="campaign-mark">SEA</div>
+                      <div class="campaign-mark">🔎</div>
                     </div>
-                    <h4>High-intent non-brand Search</h4>
-                    <p>Перший запуск концентрується на non-brand intent validation, а не на одночасному тесті всіх Google-каналів.</p>
+                    <h4>Non-brand Search із сильним інтентом</h4>
+                    <p>Перший запуск будуємо навколо non-brand Search, щоб зрозуміти, чи можемо купувати якісний попит за прийнятною ціною.</p>
                   </article>
 
                   <article class="campaign-card">
                     <div class="campaign-top">
-                      <div class="campaign-mark">CL</div>
+                      <div class="campaign-mark">🧩</div>
                     </div>
-                    <h4>Intent clusters</h4>
-                    <p>Окремі кампанії або ad groups під різні user intents: reflection, personal AI, overthinking / decision-making.</p>
+                    <h4>Поділ за intent-кластерами</h4>
+                    <p>Окремі кампанії або ad groups під різні user intents: reflection, personal AI, overthinking / decision-making. Для кожного кластера — свій меседж, перший екран квізу і своя оцінка якості.</p>
                   </article>
 
                   <article class="campaign-card">
                     <div class="campaign-top">
-                      <div class="campaign-mark">BR</div>
+                      <div class="campaign-mark">🏷️</div>
                     </div>
-                    <h4>Small Brand campaign</h4>
-                    <p>Brand Search лишається тільки як маленька окрема кампанія, якщо вже існує брендований попит.</p>
+                    <h4>Brand Search як підтримка</h4>
+                    <p>Brand Search залишаємо окремою невеликою кампанією, якщо вже є брендований попит або користувач бачив інші контакти з COPYMIND.</p>
                   </article>
                 </div>
-                <div class="keyword-label">Negative keywords</div>
+                <div class="keyword-label">Мінус-слова</div>
                 <div class="chip-list">
                   <span class="chip">therapy</span>
                   <span class="chip">therapist</span>
@@ -2470,11 +2470,79 @@
                   <span class="chip">course</span>
                   <span class="chip">definition</span>
                 </div>
-                <div class="quiz-accent"><strong>Фокус старту:</strong> non-brand search validation, search term relevance і якість intent-кластерів, а не швидке масштабування.</div>
+                <div class="quiz-accent"><strong>Фокус старту:</strong> не масштабування, а перевірка search terms, якості intent-кластерів і собівартості проходження квізу.</div>
               </article>
 
               <article class="strategy-subblock">
-                <h3>Key metrics for the first 30 days</h3>
+                <h3>Роль Demand Gen у старті</h3>
+                <div class="campaign-grid">
+                  <article class="campaign-card">
+                    <div class="campaign-top">
+                      <div class="campaign-mark">🎯</div>
+                    </div>
+                    <h4>Паралельний тест креативних гіпотез</h4>
+                    <p>Demand Gen на старті не замінює Search. Його роль — у контрольованому запуску перевірити кілька креативних підходів і зібрати базу для подальшого масштабування.</p>
+                  </article>
+
+                  <article class="campaign-card">
+                    <div class="campaign-top">
+                      <div class="campaign-mark">🧠</div>
+                    </div>
+                    <h4>Глибший квіз для холоднішого трафіку</h4>
+                    <p>У Demand Gen / YouTube користувач частіше приходить із креативу, а не зі сформованого запиту. Тому квіз має не лише кваліфікувати, а й коротко пояснювати цінність продукту та підводити до сторінки результату.</p>
+                  </article>
+
+                  <article class="campaign-card">
+                    <div class="campaign-top">
+                      <div class="campaign-mark">📊</div>
+                    </div>
+                    <h4>Критерій оцінки</h4>
+                    <p>Demand Gen порівнюємо із Search не за дешевим кліком, а за якістю проходження воронки: quiz start, quiz complete, result view, signup / payment intent.</p>
+                  </article>
+                </div>
+                <div class="quiz-accent"><strong>Роль каналу:</strong> запускати Demand Gen паралельно з Search, але з окремим бюджетом і окремими критеріями якості трафіку.</div>
+              </article>
+
+              <article class="strategy-subblock">
+                <h3>Креативні напрями для Demand Gen</h3>
+                <div class="traffic-change-grid">
+                  <article class="traffic-change-card">
+                    <div class="traffic-change-top">
+                      <div class="traffic-change-index">01</div>
+                      <h4>Overthinking / mental chaos</h4>
+                    </div>
+                    <p>Креативний напрям про стан, коли в голові занадто багато думок і складно навести лад. Завдання креативу — показати, що COPYMIND допомагає зібрати думки, побачити свій патерн і швидше прийти до ясності.</p>
+                  </article>
+
+                  <article class="traffic-change-card">
+                    <div class="traffic-change-top">
+                      <div class="traffic-change-index">02</div>
+                      <h4>Private reflection / self-understanding</h4>
+                    </div>
+                    <p>Креативи про приватний простір для думок, рефлексії та кращого розуміння себе. Важливо не заходити в therapy / medical territory, а тримати позиціонування в self-reflection і personal clarity.</p>
+                  </article>
+
+                  <article class="traffic-change-card">
+                    <div class="traffic-change-top">
+                      <div class="traffic-change-index">03</div>
+                      <h4>AI Twin / personal AI</h4>
+                    </div>
+                    <p>Креативний напрям про персонального AI-співрозмовника, який слухає, пам’ятає контекст і допомагає структурувати думки. Тут логічно тестувати messaging навколо AI Twin, personal AI та reflection companion.</p>
+                  </article>
+
+                  <article class="traffic-change-card">
+                    <div class="traffic-change-top">
+                      <div class="traffic-change-index">04</div>
+                      <h4>Patterns / personal result</h4>
+                    </div>
+                    <p>Сам квіз може бути hook, якщо користувач отримує персональний результат про свої thought patterns або decision style. Це добре зшиває рекламне повідомлення, landing і сторінку результату в одну зрозумілу логіку.</p>
+                  </article>
+                </div>
+                <div class="quiz-accent"><strong>Принцип для креативів:</strong> не копіювати конкурентів напряму, а брати з категорії робочі тригери, болі й формати. На першому тесті краще підготувати 6–8 різних підходів і оцінювати їх не лише за CTR / CPC, а й за глибиною проходження квізу, signup rate та purchase intent.</div>
+              </article>
+
+              <article class="strategy-subblock">
+                <h3>Ключові метрики перших 30 днів</h3>
                 <div class="opt-grid">
                   <article class="metric-card">
                     <h4>Метрики перших 30 днів</h4>
@@ -2498,19 +2566,15 @@
                   <article class="signal-card">
                     <h4>Сигнали для масштабування</h4>
                     <ul class="signal-list">
-                      <li>quiz completion rate стабільний і не гірший або близький до FB</li>
+                      <li>quiz completion rate стабільний і не нижчий, ніж у FB</li>
                       <li>cost per quiz complete не зростає різко при збільшенні бюджету</li>
-                      <li>purchase rate стабільний і не гірший або близький до FB</li>
-                      <li>ARPU / early LTV вписується в цільову unit-економіку</li>
+                      <li>purchase rate стабільний і не нижчий, ніж у FB</li>
+                      <li>ARPU / early LTV вкладається в цільову unit-економіку</li>
                     </ul>
                   </article>
                 </div>
               </article>
 
-              <article class="conclusion-card">
-                <h3>Summary</h3>
-                <p>Правильна логіка цього варіанту — не запускати все одночасно. Спочатку <strong>Search</strong> валідовує реальний попит і intent clusters, потім <strong>quiz / landing personalization</strong> підвищує якість воронки, після цього <strong>Demand Gen / YouTube</strong> тестують creative angles, а <strong>PMax</strong> і <strong>App campaigns</strong> підключаються лише як етап масштабування або окремий experiment.</p>
-              </article>
             </div>
           </article>
         </section>
@@ -2523,14 +2587,16 @@
 
             <div class="strategy-head">
               <h2>Загальний висновок</h2>
-              <p>Фінальний блок по всьому тестовому: як у Google працюють конкуренти, чому вони комунікують саме так і яку логіку запуску для COPYMIND доцільно вважати найсильнішою.</p>
             </div>
 
             <article class="conclusion-card">
-              <h3>Що показав аналіз</h3>
-              <p>У Google-середовищі конкуренти найчастіше продають не просто застосунок, а <strong>конкретний стан, проблему або user intent</strong>. У Search вони займають попит навколо AI companion, self-reflection, overthinking, mood tracking, self-care та emotional support, а у paid-комунікації заходять через знайомі для користувача моменти: anxiety, procrastination, need to talk, emotional chaos, desire to understand yourself. Така логіка працює, бо холодний трафік краще реагує на зрозумілий pain point і швидку обіцянку результату, ніж на абстрактне позиціонування продукту.</p>
-              <p>Для COPYMIND найбільш релевантною виглядає <strong>зв'язка Search + quiz landing</strong>. Вона дозволяє спочатку перевірити реальний попит і якість intent-кластерів, а потім уже через квіз персоналізувати меседж, знизити бар'єр входу та зібрати глибші сигнали якості, ніж прямий перехід одразу в store. Саме тому як базову логіку запуску ми обираємо не одночасний старт усіх форматів, а поетапну модель: <strong>non-brand Search для валідації</strong>, далі <strong>ітерації quiz / landing</strong>, потім <strong>Demand Gen / YouTube для creative testing</strong>, а <strong>PMax і App campaigns</strong> підключаємо тільки після появи підтверджених бізнес-сигналів або як окремий experiment.</p>
-              <p>Сильна сторона цієї стратегії в тому, що вона допомагає оцінювати канали не лише по кліку чи install, а по повній логіці воронки: <strong>intent → quiz start → quiz completion → purchase / value</strong>. Для COPYMIND це особливо важливо, бо продукт ближчий не до broad wellness app, а до персонального AI-інструменту для рефлексії, ясності та розуміння власних патернів. Тобто виграє не той меседж, який просто приводить дешевий трафік, а той, який приводить користувача з найкращим поєднанням completion, purchase та early value.</p>
+              <h3>Основний висновок</h3>
+              <p>Конкуренти в Google Ads просувають не просто застосунок, а конкретний <strong>user intent</strong> або проблему: AI companion, self-reflection, overthinking, mood tracking, emotional support. У комунікації вони заходять через зрозумілі болі користувача: anxiety, procrastination, emotional chaos, need to talk, desire to understand yourself.</p>
+              <p><strong>На мою думку, для стартового запуску Google Ads краще протестувати дві основні гіпотези:</strong></p>
+              <p><strong>1. Прямі пошукові запити користувачів через non-brand Search.</strong><br>Це дозволить перевірити, чи є сформований попит на продукт і чи можуть прямі пошукові intent-кластери потенційно приводити більш мотивовану аудиторію в квіз.</p>
+              <p><strong>2. Demand Gen з креативними гіпотезами.</strong><br>Це дозволить перевірити, чи можемо ми створювати попит через креативи саме в Google, емоційні сценарії, а також порівняти якість такого трафіку з пошуковим та Facebook.</p>
+              <p>Основна логіка запуску: спочатку перевірити прямий попит через Search, паралельно протестувати креативні гіпотези через Demand Gen, далі можна тестувати PMax та App campaigns.</p>
+              <p>Головна мета — знайти не найдешевший трафік, а зв’язки, які дають найкращу якість по всій воронці.</p>
             </article>
           </article>
         </section>
