@@ -37,6 +37,7 @@
       min-height: 100vh;
       font-family: Inter, "Segoe UI", sans-serif;
       color: var(--text);
+      overflow-x: hidden;
       background:
         radial-gradient(circle at 78% 18%, rgba(1, 137, 255, 0.18), transparent 22%),
         radial-gradient(circle at 18% 82%, rgba(1, 98, 182, 0.16), transparent 26%),
@@ -1292,6 +1293,268 @@
       }
     }
 
+    @media (max-width: 720px) {
+      .sidebar {
+        padding: 14px 14px 12px;
+      }
+
+      .sidebar-inner {
+        gap: 14px;
+      }
+
+      .sidebar-label {
+        font-size: 0.72rem;
+      }
+
+      .project-title {
+        gap: 10px;
+        font-size: 0.9rem;
+      }
+
+      .project-mark {
+        width: 10px;
+        height: 10px;
+        box-shadow: 0 0 0 6px rgba(1, 137, 255, 0.14);
+      }
+
+      .progress-nav {
+        gap: 8px;
+        padding-bottom: 2px;
+      }
+
+      .progress-link {
+        flex-basis: 170px;
+        min-width: 170px;
+        gap: 10px;
+        padding: 11px 12px;
+      }
+
+      .progress-index {
+        min-width: 24px;
+        font-size: 0.74rem;
+      }
+
+      .progress-copy strong {
+        font-size: 0.84rem;
+        margin-bottom: 0;
+      }
+
+      .content {
+        padding: 14px 12px 28px;
+      }
+
+      .content-shell {
+        width: 100%;
+      }
+
+      .section,
+      .analysis-section,
+      .presence-section,
+      .strategy-section {
+        padding: 8px 0 16px;
+      }
+
+      .hero-card {
+        min-height: 62vh;
+        padding: 28px 18px;
+      }
+
+      .hero-card::after {
+        width: 240px;
+        height: 240px;
+        right: -90px;
+        top: -90px;
+      }
+
+      .hero-copy {
+        max-width: 100%;
+      }
+
+      .eyebrow,
+      .block-kicker,
+      .strategy-badge {
+        padding: 8px 12px;
+        font-size: 0.76rem;
+      }
+
+      h1 {
+        font-size: clamp(2.35rem, 12vw, 4rem);
+        line-height: 1.02;
+        max-width: 8.4ch;
+      }
+
+      .hero-credit {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .hero-credit-label {
+        letter-spacing: 0.08em;
+      }
+
+      .analysis-card,
+      .column-card,
+      .presence-card,
+      .strategy-card,
+      .summary-card,
+      .strategy-subblock,
+      .campaign-card,
+      .timeline-card,
+      .cluster-card,
+      .metric-card,
+      .signal-card,
+      .presence-item,
+      .conclusion-card,
+      .method-note,
+      .traffic-change-card {
+        padding: 18px;
+        border-radius: 20px;
+      }
+
+      .block-head,
+      .strategy-head {
+        margin: 18px 0 20px;
+      }
+
+      .block-head h2,
+      .strategy-head h2 {
+        font-size: clamp(1.7rem, 8.4vw, 2.25rem);
+        line-height: 1.08;
+      }
+
+      .subblock-title,
+      .strategy-subblock h3,
+      .summary-card h3,
+      .conclusion-card h3 {
+        font-size: 1.04rem;
+      }
+
+      .column-card h3,
+      .presence-item h3,
+      .campaign-card h4,
+      .timeline-card h4,
+      .cluster-card h4,
+      .metric-card h4,
+      .signal-card h4,
+      .traffic-change-card h4 {
+        font-size: 0.98rem;
+      }
+
+      .block-head p,
+      .strategy-head p,
+      .presence-summary,
+      .competitor-body p,
+      .method-note,
+      .conclusion-card p,
+      .campaign-card p,
+      .timeline-card p,
+      .cluster-card p,
+      .traffic-change-card p {
+        font-size: 0.91rem;
+        line-height: 1.62;
+      }
+
+      .presence-head {
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .presence-icon,
+      .competitor-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+      }
+
+      .competitor-card {
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 12px;
+        padding: 13px;
+      }
+
+      .creative-controls {
+        position: static;
+        justify-content: flex-end;
+        margin-bottom: 10px;
+      }
+
+      .creative-button {
+        width: 34px;
+        height: 34px;
+      }
+
+      .creative-gallery {
+        grid-auto-columns: 84vw;
+        gap: 10px;
+        padding-right: 0;
+      }
+
+      .creative-card {
+        border-radius: 15px;
+      }
+
+      .keyword-tags,
+      .chip-list {
+        gap: 6px;
+      }
+
+      .keyword-tag,
+      .chip {
+        padding: 6px 9px;
+        font-size: 0.76rem;
+      }
+
+      .timeline-stage {
+        font-size: 0.78rem;
+        margin-bottom: 10px;
+      }
+
+      .timeline-mini {
+        padding: 11px 12px;
+      }
+
+      .timeline-mini strong {
+        font-size: 0.76rem;
+      }
+
+      .timeline-mini span {
+        font-size: 0.84rem;
+      }
+
+      .cluster-copy {
+        min-height: auto;
+      }
+
+      .hypothesis-note {
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+
+      .funnel-track {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .funnel-step {
+        justify-content: flex-start;
+        text-align: left;
+        min-height: auto;
+        padding: 13px 14px;
+        font-size: 0.84rem;
+      }
+
+      .funnel-step::after {
+        display: none;
+      }
+
+      .metric-list li,
+      .signal-list li {
+        font-size: 0.88rem;
+        line-height: 1.58;
+      }
+    }
+
     @media (max-width: 560px) {
       .sidebar {
         padding: 20px 16px;
@@ -1449,6 +1712,65 @@
 
       .creative-card {
         border-radius: 16px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .sidebar {
+        padding: 12px 10px 10px;
+      }
+
+      .content {
+        padding: 10px 8px 24px;
+      }
+
+      .progress-link {
+        flex-basis: 154px;
+        min-width: 154px;
+        padding: 10px 11px;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 11.5vw, 3rem);
+        max-width: 8ch;
+      }
+
+      .hero-card {
+        min-height: 56vh;
+        padding: 22px 14px;
+      }
+
+      .analysis-card,
+      .column-card,
+      .presence-card,
+      .strategy-card,
+      .summary-card,
+      .strategy-subblock,
+      .campaign-card,
+      .timeline-card,
+      .cluster-card,
+      .metric-card,
+      .signal-card,
+      .presence-item,
+      .conclusion-card,
+      .method-note,
+      .traffic-change-card {
+        padding: 16px;
+        border-radius: 18px;
+      }
+
+      .creative-gallery {
+        grid-auto-columns: 88vw;
+      }
+
+      .hero-credit-label,
+      .hero-name {
+        font-size: 0.94rem;
+      }
+
+      .block-head h2,
+      .strategy-head h2 {
+        font-size: clamp(1.55rem, 8vw, 2rem);
       }
     }
   </style>
