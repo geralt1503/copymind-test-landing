@@ -17,7 +17,8 @@
       --brand: #0189ff;
       --brand-deep: #0162b6;
       --sidebar-width: 250px;
-      --content-width: 1180px;
+      --content-width: 1320px;
+      --content-shift: 72px;
       --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
       --radius-xl: 32px;
       --radius-lg: 24px;
@@ -53,8 +54,6 @@
     }
 
     .layout {
-      display: grid;
-      grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
       min-height: 100vh;
       width: 100%;
       max-width: 100vw;
@@ -62,14 +61,18 @@
     }
 
     .sidebar {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: var(--sidebar-width);
       height: 100vh;
       padding: 28px 22px;
       border-right: 1px solid rgba(255, 255, 255, 0.06);
       background: rgba(0, 4, 20, 0.84);
       backdrop-filter: blur(14px);
       min-width: 0;
+      overflow-y: auto;
+      z-index: 20;
     }
 
     .sidebar-inner {
@@ -183,14 +186,15 @@
     }
 
     .content {
-      padding: 32px 36px 48px;
+      padding: 28px 24px 48px;
       min-width: 0;
-      width: 100%;
+      width: calc(100% - var(--sidebar-width));
+      margin-left: var(--sidebar-width);
     }
 
     .content-shell {
       width: min(100%, var(--content-width));
-      margin: 0 auto;
+      margin: 0 auto 0 max(0px, calc((100% - var(--content-width)) / 2 - var(--content-shift)));
       min-width: 0;
     }
 
@@ -1194,6 +1198,58 @@
       line-height: 1.72;
     }
 
+    .strategy-table-wrap {
+      overflow-x: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .strategy-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+    }
+
+    .strategy-table thead th {
+      padding: 14px 16px;
+      text-align: left;
+      background: rgba(1, 137, 255, 0.16);
+      color: #ffffff;
+      font-size: 0.92rem;
+      line-height: 1.4;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .strategy-table thead th:last-child {
+      border-right: 0;
+    }
+
+    .strategy-table tbody td {
+      padding: 14px 16px;
+      vertical-align: top;
+      color: rgba(246, 248, 255, 0.88);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .strategy-table tbody td:last-child {
+      border-right: 0;
+    }
+
+    .strategy-table tbody td:first-child {
+      white-space: nowrap;
+      color: rgba(246, 248, 255, 0.96);
+      width: 96px;
+    }
+
+    .strategy-table tbody td:nth-child(2) {
+      color: #ffffff;
+      width: 240px;
+    }
+
     .metric-list,
     .signal-list {
       display: grid;
@@ -1227,7 +1283,7 @@
 
     @media (max-width: 1040px) {
       .layout {
-        grid-template-columns: 1fr;
+        display: block;
       }
 
       .sidebar {
@@ -1284,6 +1340,7 @@
 
       .content {
         padding: 24px 20px 40px;
+        margin-left: 0;
       }
     }
 
@@ -1873,6 +1930,12 @@
               <strong>Стратегія запуску Google Ads для COPYMIND</strong>
             </span>
           </a>
+          <a class="progress-link" href="#overall-summary" data-target="overall-summary">
+            <span class="progress-index">05</span>
+            <span class="progress-copy">
+              <strong>Summary</strong>
+            </span>
+          </a>
         </nav>
 
         <div class="sidebar-note">
@@ -2055,18 +2118,6 @@
                     </figure>
                   </div>
                 </div>
-                <div class="keyword-label">Можливі keywords</div>
-                <div class="keyword-tags">
-                  <span class="keyword-tag">AI companion</span>
-                  <span class="keyword-tag">AI friend</span>
-                  <span class="keyword-tag">AI boyfriend</span>
-                  <span class="keyword-tag">AI girlfriend</span>
-                  <span class="keyword-tag">AI romantic partner</span>
-                  <span class="keyword-tag">virtual companion</span>
-                  <span class="keyword-tag">talk to AI</span>
-                  <span class="keyword-tag">AI for learning English</span>
-                  <span class="keyword-tag">English speaking practice AI</span>
-                </div>
               </article>
 
               <article class="presence-item">
@@ -2101,18 +2152,6 @@
                     </figure>
                   </div>
                 </div>
-                <div class="keyword-label">Можливі keywords</div>
-                <div class="keyword-tags">
-                  <span class="keyword-tag">ADHD test</span>
-                  <span class="keyword-tag">procrastination test</span>
-                  <span class="keyword-tag">hypersexuality test</span>
-                  <span class="keyword-tag">self-discovery app</span>
-                  <span class="keyword-tag">mental health quiz</span>
-                  <span class="keyword-tag">focus problems</span>
-                  <span class="keyword-tag">overthinking</span>
-                  <span class="keyword-tag">emotional patterns</span>
-                  <span class="keyword-tag">dopamine reward system</span>
-                </div>
               </article>
 
               <article class="presence-item">
@@ -2143,16 +2182,6 @@
                       <img src="assets/creatives/finch-creative-4.png" alt="Finch expanded search ad">
                     </figure>
                   </div>
-                </div>
-                <div class="keyword-label">Можливі keywords</div>
-                <div class="keyword-tags">
-                  <span class="keyword-tag">self-care app</span>
-                  <span class="keyword-tag">mental health tracker</span>
-                  <span class="keyword-tag">mood tracker</span>
-                  <span class="keyword-tag">habit tracker</span>
-                  <span class="keyword-tag">daily self-care</span>
-                  <span class="keyword-tag">neurodivergent self-care</span>
-                  <span class="keyword-tag">healthy routines app</span>
                 </div>
               </article>
 
@@ -2185,17 +2214,6 @@
                     </figure>
                   </div>
                 </div>
-                <div class="keyword-label">Можливі keywords</div>
-                <div class="keyword-tags">
-                  <span class="keyword-tag">personal AI</span>
-                  <span class="keyword-tag">AI assistant</span>
-                  <span class="keyword-tag">AI companion</span>
-                  <span class="keyword-tag">talk to AI</span>
-                  <span class="keyword-tag">AI that listens</span>
-                  <span class="keyword-tag">reflection guide</span>
-                  <span class="keyword-tag">AI for planning</span>
-                  <span class="keyword-tag">AI for personal growth</span>
-                </div>
               </article>
 
               <article class="presence-item">
@@ -2227,19 +2245,6 @@
                     </figure>
                   </div>
                 </div>
-                <div class="keyword-label">Можливі keywords</div>
-                <div class="keyword-tags">
-                  <span class="keyword-tag">AI journal</span>
-                  <span class="keyword-tag">AI diary</span>
-                  <span class="keyword-tag">journaling app</span>
-                  <span class="keyword-tag">self-reflection app</span>
-                  <span class="keyword-tag">personal growth app</span>
-                  <span class="keyword-tag">self-care journal</span>
-                  <span class="keyword-tag">mental health journal</span>
-                  <span class="keyword-tag">healing journal</span>
-                  <span class="keyword-tag">daily reflection app</span>
-                  <span class="keyword-tag">journal for anxiety</span>
-                </div>
               </article>
 
               <article class="presence-item">
@@ -2267,17 +2272,6 @@
                       <img src="assets/creatives/headspace-creative-3.png" alt="Headspace official app sponsored ad">
                     </figure>
                   </div>
-                </div>
-                <div class="keyword-label">Можливі keywords</div>
-                <div class="keyword-tags">
-                  <span class="keyword-tag">mental health app</span>
-                  <span class="keyword-tag">meditation app</span>
-                  <span class="keyword-tag">mindfulness app</span>
-                  <span class="keyword-tag">stress relief app</span>
-                  <span class="keyword-tag">anxiety thoughts</span>
-                  <span class="keyword-tag">sleep app</span>
-                  <span class="keyword-tag">guided meditation</span>
-                  <span class="keyword-tag">breathing exercises</span>
                 </div>
               </article>
             </div>
@@ -2351,7 +2345,6 @@
             </article>
           </article>
         </section>
-
         <section class="strategy-section" id="launch-strategy" data-section="launch-strategy">
           <article class="strategy-card">
             <div class="strategy-badge">
@@ -2361,7 +2354,7 @@
 
             <div class="strategy-head">
               <h2>Стратегія запуску Google Ads для COPYMIND</h2>
-              <p>Стратегія запуску з урахуванням quiz landing: від першого кліку до проходження квізу, реєстрації, оплати та встановлення застосунку.</p>
+                            <p>Послідовна логіка запуску за документом: <strong>Search first</strong> для валідації non-brand попиту, далі <strong>quiz personalization</strong>, потім creative testing у Demand Gen / YouTube, після цього <strong>PMax scaling</strong> і окремий <strong>app experiment</strong>.</p>
             </div>
 
             <div class="strategy-stack">
@@ -2381,304 +2374,51 @@
                 </div>
               </article>
 
-              <article class="strategy-subblock">
-                <h3>Пріоритет запуску</h3>
-                <div class="timeline-grid">
-                  <article class="timeline-card">
-                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Етап 1</span></div>
-                    <h4>Search + Brand Search</h4>
-                    <div class="timeline-group">
-                      <div class="timeline-mini">
-                        <strong>Ціль етапу</strong>
-                        <span>Перевірити Search по конкретних частотних пошукових запитах, релевантних до COPYMIND, і зрозуміти, наскільки дорогим може бути прямий пошуковий трафік.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Які сигнали перевіряємо</strong>
-                        <span>CPC, CTR, search intent quality, quiz start rate, quiz completion rate і потенційну вартість трафіку з прямого пошуку.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Які кампанії запускаємо</strong>
-                        <span>Search і Brand Search як базу для першої перевірки попиту, вартості кліка і якості трафіку на quiz landing.</span>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="timeline-card">
-                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Етап 2</span></div>
-                    <h4>Video / YouTube + Demand Gen + Performance Max</h4>
-                    <div class="timeline-group">
-                      <div class="timeline-mini">
-                        <strong>Ціль етапу</strong>
-                        <span>Розширити охоплення і протестувати video-first storytelling, Demand Gen та ширший multi-channel показ для quiz funnel.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Які сигнали перевіряємо</strong>
-                        <span>Engagement з відео, cost per quiz complete, signup rate після results page, стабільність сигналів у ширшому охопленні.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Які кампанії запускаємо</strong>
-                        <span>YouTube / Video, Demand Gen і Performance Max на вже підтверджених комунікаційних напрямах.</span>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="timeline-card">
-                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Етап 3</span></div>
-                    <h4>App campaigns</h4>
-                    <div class="timeline-group">
-                      <div class="timeline-mini">
-                        <strong>Ціль етапу</strong>
-                        <span>Тестувати трафік одразу в застосунок, де користувач проходить quiz вже всередині app flow, і порівняти якість цього сценарію з web quiz funnel.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Які сигнали перевіряємо</strong>
-                        <span>Install rate, cost per install, quiz start rate, quiz completion rate, activation rate і якість користувача після проходження квізу в app flow.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Які кампанії запускаємо</strong>
-                        <span>App campaigns як окремий формат для прямого тестування install traffic, де ключова подія так само зав’язана на проходження квізу, але вже всередині застосунку.</span>
-                      </div>
-                    </div>
-                  </article>
-                </div>
-              </article>
 
               <article class="strategy-subblock">
-                <h3>Теми для ключів і перших креативних гіпотез</h3>
-                <div class="cluster-grid">
-                  <article class="cluster-card">
-                    <h4>Private reflection / organize thoughts</h4>
-                    <p class="cluster-copy">Більш точний для COPYMIND кластер: приватний простір для думок, рефлексії та розкладання внутрішнього хаосу без позиціонування як journal.</p>
-                    <p class="cluster-label">Теми для ключів</p>
-                    <div class="chip-list">
-                      <span class="chip">private reflection</span>
-                      <span class="chip">organize thoughts</span>
-                      <span class="chip">clarify emotions</span>
-                      <span class="chip">reflect with AI</span>
-                      <span class="chip">private space to think</span>
-                    </div>
-                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “Think privately. See your thoughts clearer.”</div>
-                  </article>
-
-                  <article class="cluster-card">
-                    <h4>AI companion / personal AI</h4>
-                    <p class="cluster-copy">Тема для запуску через персонального AI-співрозмовника, який слухає, пам’ятає контекст і допомагає розібратися з думками.</p>
-                    <p class="cluster-label">Теми для ключів</p>
-                    <div class="chip-list">
-                      <span class="chip">AI companion</span>
-                      <span class="chip">personal AI</span>
-                      <span class="chip">AI friend</span>
-                      <span class="chip">talk to AI</span>
-                      <span class="chip">AI that listens</span>
-                    </div>
-                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “Your personal AI for thinking out loud”</div>
-                  </article>
-
-                  <article class="cluster-card">
-                    <h4>Decision clarity</h4>
-                    <p class="cluster-copy">Кластер для користувачів, яким складно приймати рішення, упорядковувати думки та знаходити ясність у перевантаженому стані.</p>
-                    <p class="cluster-label">Теми для ключів</p>
-                    <div class="chip-list">
-                      <span class="chip">decision clarity</span>
-                      <span class="chip">organize thoughts</span>
-                      <span class="chip">AI for decisions</span>
-                      <span class="chip">clarity app</span>
-                      <span class="chip">thinking support</span>
-                    </div>
-                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “From chaos to clarity”</div>
-                  </article>
-
-                  <article class="cluster-card">
-                    <h4>Self-discovery / personal growth</h4>
-                    <p class="cluster-copy">Підхід через самопізнання, personal growth і пошук повторюваних патернів, які пояснюють реакції, емоції та поведінку.</p>
-                    <p class="cluster-label">Теми для ключів</p>
-                    <div class="chip-list">
-                      <span class="chip">self-discovery app</span>
-                      <span class="chip">personal growth app</span>
-                      <span class="chip">understand yourself</span>
-                      <span class="chip">reflection guide</span>
-                      <span class="chip">personal insights</span>
-                    </div>
-                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “See your patterns, know yourself better”</div>
-                  </article>
-
-                  <article class="cluster-card">
-                    <h4>Mood / patterns</h4>
-                    <p class="cluster-copy">Тема для креативів, де COPYMIND допомагає відслідковувати емоційні цикли, щоденний стан і повторювані thought patterns.</p>
-                    <p class="cluster-label">Теми для ключів</p>
-                    <div class="chip-list">
-                      <span class="chip">mood tracking</span>
-                      <span class="chip">emotional patterns</span>
-                      <span class="chip">thought patterns</span>
-                      <span class="chip">pattern tracking</span>
-                      <span class="chip">daily mood check</span>
-                    </div>
-                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “Track moods. Spot patterns. Reflect smarter.”</div>
-                  </article>
-
-                  <article class="cluster-card">
-                    <h4>Mental well-being</h4>
-                    <p class="cluster-copy">Вхід через м’який mental well-being angle: overthinking, stress reflection, приватна емоційна підтримка без жорсткої терапевтичної рамки.</p>
-                    <p class="cluster-label">Теми для ключів</p>
-                    <div class="chip-list">
-                      <span class="chip">mental well-being app</span>
-                      <span class="chip">overthinking help</span>
-                      <span class="chip">private emotional support</span>
-                      <span class="chip">stress reflection</span>
-                      <span class="chip">mind clarity</span>
-                    </div>
-                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “A private space to think and feel clearer”</div>
-                  </article>
-                </div>
-              </article>
-
-              <article class="strategy-subblock">
-                <h3>Optimization mindset</h3>
-                <div class="opt-grid">
-                  <article class="metric-card">
-                    <h4>Метрики перших 30 днів</h4>
-                    <ul class="metric-list">
-                      <li>CTR</li>
-                      <li>CPC</li>
-                      <li>quiz start rate</li>
-                      <li>quiz completion rate</li>
-                      <li>cost per quiz complete</li>
-                      <li>ARPU</li>
-                      <li>payment start rate</li>
-                      <li>purchase rate</li>
-                      <li>CAC</li>
-                      <li>install / activation rate</li>
-                    </ul>
-                  </article>
-
-                  <article class="signal-card">
-                    <h4>Сигнали для масштабування</h4>
-                    <ul class="signal-list">
-                      <li>quiz completion rate стабільний і не гірший або близький до FB</li>
-                      <li>cost per quiz complete не зростає різко при збільшенні бюджету</li>
-                      <li>purchase rate стабільний і не гірший або близький до FB</li>
-                      <li>CAC вписується в цільову unit-економіку</li>
-                      <li>ARPU / early LTV не нижчий або близький до Facebook-трафіку</li>
-                    </ul>
-                  </article>
-                </div>
-              </article>
-
-            </div>
-          </article>
-        </section>
-
-        <section class="strategy-section" id="launch-strategy-alt">
-          <article class="strategy-card">
-            <div class="strategy-badge">
-              <span class="eyebrow-dot"></span>
-              <span>Google Ads Strategy</span>
-            </div>
-
-            <div class="strategy-head">
-              <h2>Стратегія запуску Google Ads для COPYMIND</h2>
-              <div class="strategy-variant-label">Варіант 2</div>
-              <p>Послідовна логіка запуску за документом: <strong>Search first</strong> для валідації non-brand попиту, далі <strong>quiz personalization</strong>, потім creative testing у Demand Gen / YouTube, після цього <strong>PMax scaling</strong> і окремий <strong>app experiment</strong>.</p>
-            </div>
-
-            <div class="strategy-stack">
-              <article class="strategy-subblock">
-                <h3>Launch stages</h3>
-                <div class="timeline-grid">
-                  <article class="timeline-card">
-                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Stage 1</span></div>
-                    <h4>Non-brand Search Validation</h4>
-                    <div class="timeline-group">
-                      <div class="timeline-mini">
-                        <strong>Goal</strong>
-                        <span>Validate real search demand and identify which intent clusters drive users into the quiz funnel.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>What to launch / test</strong>
-                        <span>High-intent Search campaigns, exact / phrase match keywords, separate campaigns or ad groups by intent cluster, small Brand campaign only if branded demand already exists.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Main focus</strong>
-                        <span>Search term relevance, CTR, CPC, quiz start rate, quiz completion rate, cost per quiz complete, signup / payment intent.</span>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="timeline-card">
-                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Stage 2</span></div>
-                    <h4>Quiz Funnel Personalization</h4>
-                    <div class="timeline-group">
-                      <div class="timeline-mini">
-                        <strong>Goal</strong>
-                        <span>Match the landing and quiz experience to the user’s original search intent.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>What to launch / test</strong>
-                        <span>AI journal traffic, AI companion traffic, overthinking / decision-making traffic with separate landing and quiz logic.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Main focus</strong>
-                        <span>Quiz start rate, quiz completion rate, result page view rate, signup rate and drop-off by quiz step.</span>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="timeline-card">
-                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Stage 3</span></div>
-                    <h4>Demand Gen / YouTube Creative Test</h4>
-                    <div class="timeline-group">
-                      <div class="timeline-mini">
-                        <strong>Goal</strong>
-                        <span>Test emotional and visual angles only after Search gives the first clear signals.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>What to launch / test</strong>
-                        <span>Overthinking, decision chaos, emotional patterns, private reflection, AI Twin / personal AI angles.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Main focus</strong>
-                        <span>Creative CTR, engaged sessions, quiz start rate, quiz completion rate and cost per qualified quiz completion.</span>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="timeline-card">
-                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Stage 4</span></div>
-                    <h4>Performance Max Scaling</h4>
-                    <div class="timeline-group">
-                      <div class="timeline-mini">
-                        <strong>Goal</strong>
-                        <span>Scale only validated messages and already proven conversion paths.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>What to launch / test</strong>
-                        <span>Launch PMax only after enough conversion data appears, with clear primary and secondary conversion events.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Main focus</strong>
-                        <span>CAC, conversion value, purchase rate, ARPU / early LTV and performance by asset group.</span>
-                      </div>
-                    </div>
-                  </article>
-
-                  <article class="timeline-card">
-                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Stage 5</span></div>
-                    <h4>App Campaigns</h4>
-                    <div class="timeline-group">
-                      <div class="timeline-mini">
-                        <strong>Goal</strong>
-                        <span>Compare web quiz funnel vs direct app acquisition as two separate growth paths.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>What to launch / test</strong>
-                        <span>Web quiz → result → signup / payment → app install versus direct app install → in-app activation.</span>
-                      </div>
-                      <div class="timeline-mini">
-                        <strong>Main focus</strong>
-                        <span>CPI, cost per activation, install-to-signup rate, install-to-purchase rate, early retention and early LTV.</span>
-                      </div>
-                    </div>
-                  </article>
+                <h3>Етапи запуску</h3>
+                <div class="strategy-table-wrap">
+                  <table class="strategy-table">
+                    <thead>
+                      <tr>
+                        <th>Етап</th>
+                        <th>Назва блоку</th>
+                        <th>Логіка рішення</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Stage 0</td>
+                        <td>Tracking &amp; funnel setup</td>
+                        <td>Підготувати події, primary / secondary conversions, UTM, conversion value model. Без цього будь-який тест буде нечистим.</td>
+                      </tr>
+                      <tr>
+                        <td>Stage 1</td>
+                        <td>Search &amp; Quiz Intent Validation</td>
+                        <td>Основний старт. Тестуємо non-brand Search, intent-кластери і одразу адаптований коротший quiz landing під кожен intent.</td>
+                      </tr>
+                      <tr>
+                        <td>Stage 1B</td>
+                        <td>Demand Gen Creative Hypothesis Test</td>
+                        <td>Паралельно, але з обмеженим бюджетом. Готуємо креативну базу, тестуємо 3–5 гіпотез і порівнюємо, чи потребує холодніший трафік глибшого квізу.</td>
+                      </tr>
+                      <tr>
+                        <td>Stage 2</td>
+                        <td>Funnel Iteration Based on Data</td>
+                        <td>Після перших даних покращуємо copy, result page, CTA, порядок питань, сегментацію та слабкі місця квізу.</td>
+                      </tr>
+                      <tr>
+                        <td>Stage 3</td>
+                        <td>Controlled PMax Experiment</td>
+                        <td>PMax не як основна валідація, а як контрольований тест масштабування з окремим бюджетом, чіткими conversion goals і окремою оцінкою якості квіз-воронки.</td>
+                      </tr>
+                      <tr>
+                        <td>Stage 4</td>
+                        <td>App Campaigns</td>
+                        <td>Окремий експеримент, бо там інша воронка: install &rarr; activation &rarr; in-app event / purchase.</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </article>
 
@@ -2709,12 +2449,7 @@
                     <p>Brand Search лишається тільки як маленька окрема кампанія, якщо вже існує брендований попит.</p>
                   </article>
                 </div>
-                <div class="quiz-accent"><strong>Фокус старту:</strong> non-brand search validation, search term relevance і якість intent-кластерів, а не швидке масштабування.</div>
-              </article>
-
-              <article class="strategy-subblock">
-                <h3>Negative keywords</h3>
-                <p class="subblock-copy">Щоб не зливати бюджет на нерелевантні запити, мінус-слова варто задати з самого старту.</p>
+                <div class="keyword-label">Negative keywords</div>
                 <div class="chip-list">
                   <span class="chip">therapy</span>
                   <span class="chip">therapist</span>
@@ -2735,151 +2470,39 @@
                   <span class="chip">course</span>
                   <span class="chip">definition</span>
                 </div>
-              </article>
-
-              <article class="strategy-subblock">
-                <h3>Tracking &amp; conversion logic</h3>
-                <div class="campaign-grid">
-                  <article class="campaign-card">
-                    <h4>Primary conversions</h4>
-                    <div class="chip-list">
-                      <span class="chip">quiz_complete</span>
-                      <span class="chip">payment_start</span>
-                      <span class="chip">purchase</span>
-                    </div>
-                  </article>
-
-                  <article class="campaign-card">
-                    <h4>Secondary conversions</h4>
-                    <div class="chip-list">
-                      <span class="chip">quiz_start</span>
-                      <span class="chip">quiz_step_25</span>
-                      <span class="chip">quiz_step_50</span>
-                      <span class="chip">quiz_step_75</span>
-                      <span class="chip">result_view</span>
-                      <span class="chip">signup_start</span>
-                      <span class="chip">account_created</span>
-                    </div>
-                  </article>
-
-                  <article class="campaign-card">
-                    <h4>Business conversions</h4>
-                    <div class="chip-list">
-                      <span class="chip">purchase</span>
-                      <span class="chip">app activation</span>
-                      <span class="chip">early retention</span>
-                      <span class="chip">early LTV</span>
-                    </div>
-                  </article>
-                </div>
-              </article>
-
-              <article class="strategy-subblock">
-                <h3>Conversion value / lead scoring</h3>
-                <div class="traffic-change-grid">
-                  <article class="traffic-change-card">
-                    <div class="traffic-change-top">
-                      <div class="traffic-change-index">01</div>
-                      <h4>Intent quality</h4>
-                    </div>
-                    <p>Порівнювати не лише ціну конверсії, а й якість трафіку по intent-кластерах: AI journal, AI companion, overthinking / decision-making.</p>
-                  </article>
-
-                  <article class="traffic-change-card">
-                    <div class="traffic-change-top">
-                      <div class="traffic-change-index">02</div>
-                      <h4>Qualified quiz completion</h4>
-                    </div>
-                    <p>Вищу цінність даємо не просто quiz complete, а qualified quiz completion з хорошим проходженням, нижчим drop-off і кращим signup / payment intent.</p>
-                  </article>
-
-                  <article class="traffic-change-card">
-                    <div class="traffic-change-top">
-                      <div class="traffic-change-index">03</div>
-                      <h4>Business value</h4>
-                    </div>
-                    <p>Фінальне порівняння каналів і intent-кластерів робимо через purchase, CAC, ARPU / early LTV та подальшу якість користувача.</p>
-                  </article>
-                </div>
+                <div class="quiz-accent"><strong>Фокус старту:</strong> non-brand search validation, search term relevance і якість intent-кластерів, а не швидке масштабування.</div>
               </article>
 
               <article class="strategy-subblock">
                 <h3>Key metrics for the first 30 days</h3>
-                <div class="campaign-grid">
-                  <article class="campaign-card">
-                    <h4>Traffic quality</h4>
-                    <ul class="mini-list">
+                <div class="opt-grid">
+                  <article class="metric-card">
+                    <h4>Метрики перших 30 днів</h4>
+                    <ul class="metric-list">
                       <li>CTR</li>
                       <li>CPC</li>
-                      <li>Search term relevance</li>
-                      <li>Impression share</li>
-                    </ul>
-                  </article>
-
-                  <article class="campaign-card">
-                    <h4>Quiz quality</h4>
-                    <ul class="mini-list">
                       <li>Quiz start rate</li>
                       <li>Quiz completion rate</li>
                       <li>Cost per quiz complete</li>
                       <li>Drop-off by quiz step</li>
-                    </ul>
-                  </article>
-
-                  <article class="campaign-card">
-                    <h4>Monetization</h4>
-                    <ul class="mini-list">
                       <li>Signup rate</li>
                       <li>Payment start rate</li>
                       <li>Purchase rate</li>
                       <li>CAC</li>
-                    </ul>
-                  </article>
-
-                  <article class="campaign-card">
-                    <h4>App quality</h4>
-                    <ul class="mini-list">
                       <li>Install rate</li>
-                      <li>Cost per activation</li>
-                      <li>Early retention</li>
                       <li>Early LTV</li>
+                      <li>ARPU</li>
                     </ul>
                   </article>
 
-                  <article class="campaign-card">
-                    <h4>Decision metric</h4>
-                    <ul class="mini-list">
-                      <li>CAC</li>
-                      <li>ARPU / early LTV</li>
-                      <li>Cost per qualified quiz completion</li>
-                      <li>Performance by intent cluster</li>
+                  <article class="signal-card">
+                    <h4>Сигнали для масштабування</h4>
+                    <ul class="signal-list">
+                      <li>quiz completion rate стабільний і не гірший або близький до FB</li>
+                      <li>cost per quiz complete не зростає різко при збільшенні бюджету</li>
+                      <li>purchase rate стабільний і не гірший або близький до FB</li>
+                      <li>ARPU / early LTV вписується в цільову unit-економіку</li>
                     </ul>
-                  </article>
-                </div>
-              </article>
-
-              <article class="strategy-subblock">
-                <h3>Messaging constraints</h3>
-                <div class="summary-grid">
-                  <article class="summary-card">
-                    <h3>Не використовуємо</h3>
-                    <div class="chip-list">
-                      <span class="chip">Free trial</span>
-                      <span class="chip">Try for free</span>
-                      <span class="chip">Start free trial</span>
-                    </div>
-                  </article>
-
-                  <article class="summary-card">
-                    <h3>Натомість</h3>
-                    <div class="chip-list">
-                      <span class="chip">Start quiz</span>
-                      <span class="chip">Take the test</span>
-                      <span class="chip">Get your personal result</span>
-                      <span class="chip">See how your mind works</span>
-                      <span class="chip">Start your reflection</span>
-                      <span class="chip">Discover your thinking patterns</span>
-                    </div>
                   </article>
                 </div>
               </article>
@@ -2891,12 +2514,32 @@
             </div>
           </article>
         </section>
+        <section class="strategy-section" id="overall-summary" data-section="overall-summary">
+          <article class="strategy-card">
+            <div class="strategy-badge">
+              <span class="eyebrow-dot"></span>
+              <span>Summary</span>
+            </div>
+
+            <div class="strategy-head">
+              <h2>Загальний висновок</h2>
+              <p>Фінальний блок по всьому тестовому: як у Google працюють конкуренти, чому вони комунікують саме так і яку логіку запуску для COPYMIND доцільно вважати найсильнішою.</p>
+            </div>
+
+            <article class="conclusion-card">
+              <h3>Що показав аналіз</h3>
+              <p>У Google-середовищі конкуренти найчастіше продають не просто застосунок, а <strong>конкретний стан, проблему або user intent</strong>. У Search вони займають попит навколо AI companion, self-reflection, overthinking, mood tracking, self-care та emotional support, а у paid-комунікації заходять через знайомі для користувача моменти: anxiety, procrastination, need to talk, emotional chaos, desire to understand yourself. Така логіка працює, бо холодний трафік краще реагує на зрозумілий pain point і швидку обіцянку результату, ніж на абстрактне позиціонування продукту.</p>
+              <p>Для COPYMIND найбільш релевантною виглядає <strong>зв'язка Search + quiz landing</strong>. Вона дозволяє спочатку перевірити реальний попит і якість intent-кластерів, а потім уже через квіз персоналізувати меседж, знизити бар'єр входу та зібрати глибші сигнали якості, ніж прямий перехід одразу в store. Саме тому як базову логіку запуску ми обираємо не одночасний старт усіх форматів, а поетапну модель: <strong>non-brand Search для валідації</strong>, далі <strong>ітерації quiz / landing</strong>, потім <strong>Demand Gen / YouTube для creative testing</strong>, а <strong>PMax і App campaigns</strong> підключаємо тільки після появи підтверджених бізнес-сигналів або як окремий experiment.</p>
+              <p>Сильна сторона цієї стратегії в тому, що вона допомагає оцінювати канали не лише по кліку чи install, а по повній логіці воронки: <strong>intent → quiz start → quiz completion → purchase / value</strong>. Для COPYMIND це особливо важливо, бо продукт ближчий не до broad wellness app, а до персонального AI-інструменту для рефлексії, ясності та розуміння власних патернів. Тобто виграє не той меседж, який просто приводить дешевий трафік, а той, який приводить користувача з найкращим поєднанням completion, purchase та early value.</p>
+            </article>
+          </article>
+        </section>
       </div>
     </main>
   </div>
 
   <script>
-    const sections = document.querySelectorAll("[data-section]");
+    const sections = [...document.querySelectorAll("[data-section]")];
     const links = document.querySelectorAll(".progress-link");
     const carousels = document.querySelectorAll(".creative-carousel");
 
@@ -2906,21 +2549,47 @@
       });
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            activateLink(entry.target.dataset.section);
-          }
-        });
-      },
-      {
-        threshold: 0.45,
-        rootMargin: "-10% 0px -35% 0px"
-      }
-    );
+    const updateActiveSection = () => {
+      const viewportMarker = window.innerHeight * 0.38;
+      let currentSection = sections[0];
+      let bestDistance = Number.POSITIVE_INFINITY;
 
-    sections.forEach((section) => observer.observe(section));
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const withinViewport = rect.top <= viewportMarker && rect.bottom >= viewportMarker;
+
+        if (withinViewport) {
+          currentSection = section;
+          bestDistance = 0;
+          return;
+        }
+
+        const distance = Math.min(
+          Math.abs(rect.top - viewportMarker),
+          Math.abs(rect.bottom - viewportMarker)
+        );
+
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          currentSection = section;
+        }
+      });
+
+      if (currentSection) {
+        activateLink(currentSection.dataset.section);
+      }
+    };
+
+    links.forEach((link) => {
+      link.addEventListener("click", () => {
+        activateLink(link.dataset.target);
+      });
+    });
+
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    window.addEventListener("load", updateActiveSection);
+    updateActiveSection();
 
     carousels.forEach((carousel) => {
       const track = carousel.querySelector("[data-carousel-track]");
