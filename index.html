@@ -1,0 +1,2267 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тестове задання для Copymind</title>
+  <style>
+    :root {
+      --bg: #000414;
+      --bg-soft: #06102d;
+      --panel: rgba(255, 255, 255, 0.04);
+      --panel-strong: rgba(255, 255, 255, 0.06);
+      --line: rgba(255, 255, 255, 0.1);
+      --line-strong: rgba(1, 137, 255, 0.34);
+      --text: #f6f8ff;
+      --muted: rgba(246, 248, 255, 0.62);
+      --brand: #0189ff;
+      --brand-deep: #0162b6;
+      --sidebar-width: 250px;
+      --content-width: 1180px;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 78% 18%, rgba(1, 137, 255, 0.18), transparent 22%),
+        radial-gradient(circle at 18% 82%, rgba(1, 98, 182, 0.16), transparent 26%),
+        linear-gradient(180deg, #000414 0%, #02081b 52%, #000414 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 22px;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(0, 4, 20, 0.84);
+      backdrop-filter: blur(14px);
+    }
+
+    .sidebar-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      height: 100%;
+    }
+
+    .sidebar-label {
+      color: rgba(255, 255, 255, 0.48);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+    }
+
+    .project-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .project-mark {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), #6dc7ff);
+      box-shadow: 0 0 0 8px rgba(1, 137, 255, 0.14);
+    }
+
+    .progress-nav {
+      display: grid;
+      gap: 10px;
+    }
+
+    .progress-copy {
+      min-width: 0;
+    }
+
+    .progress-link {
+      position: relative;
+      display: flex;
+      gap: 12px;
+      padding: 14px 14px 14px 16px;
+      border-radius: 16px;
+      color: rgba(255, 255, 255, 0.68);
+      border: 1px solid transparent;
+      transition: 180ms ease;
+    }
+
+    .progress-link:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .progress-link.active {
+      color: var(--text);
+      background: linear-gradient(180deg, rgba(1, 137, 255, 0.12), rgba(255, 255, 255, 0.04));
+      border-color: var(--line-strong);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .progress-link.active::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 14px;
+      bottom: 14px;
+      width: 3px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #6dc7ff, var(--brand));
+    }
+
+    .progress-index {
+      color: var(--brand);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      min-width: 28px;
+      padding-top: 1px;
+    }
+
+    .progress-copy strong {
+      display: block;
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+
+    .progress-copy span {
+      display: block;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .sidebar-note {
+      margin-top: auto;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .content {
+      padding: 32px 36px 48px;
+    }
+
+    .content-shell {
+      width: min(100%, var(--content-width));
+      margin: 0 auto;
+    }
+
+    .section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .hero-card {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 78vh;
+      padding: 48px 36px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025)),
+        linear-gradient(180deg, rgba(1, 137, 255, 0.06), rgba(1, 98, 182, 0.04));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      right: -110px;
+      top: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(1, 137, 255, 0.18), transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      margin-bottom: 22px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(1, 137, 255, 0.14);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 12.5ch;
+      font-size: clamp(2.9rem, 5vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      font-weight: 650;
+    }
+
+    .hero-title-line {
+      display: block;
+    }
+
+    .title-italic {
+      font-style: italic;
+      font-weight: 560;
+      color: rgba(246, 248, 255, 0.92);
+    }
+
+    .title-strong {
+      font-weight: 760;
+      color: #ffffff;
+    }
+
+    .title-brand {
+      font-weight: 760;
+      color: #f7fbff;
+      text-shadow: 0 0 26px rgba(1, 137, 255, 0.16);
+    }
+
+    .hero-credit {
+      margin-top: 24px;
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: rgba(246, 248, 255, 0.8);
+    }
+
+    .hero-credit-label {
+      font-size: 0.98rem;
+      line-height: 1.4;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-style: italic;
+      color: rgba(246, 248, 255, 0.48);
+    }
+
+    .hero-name {
+      max-width: none;
+      color: rgba(246, 248, 255, 0.86);
+      font-size: clamp(1.08rem, 1.7vw, 1.34rem);
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      font-weight: 650;
+    }
+
+    .analysis-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 36px 0 24px;
+    }
+
+    .analysis-card {
+      width: 100%;
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
+        linear-gradient(180deg, rgba(1, 137, 255, 0.05), rgba(1, 98, 182, 0.035));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .block-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .block-head {
+      margin: 22px 0 28px;
+      max-width: 980px;
+    }
+
+    .block-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    .block-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 1rem;
+      max-width: none;
+    }
+
+    .subblock-title {
+      margin: 0 0 18px;
+      font-size: 1.26rem;
+      line-height: 1.4;
+      color: rgba(246, 248, 255, 0.96);
+    }
+
+    .columns-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .column-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .column-card h3 {
+      margin: 0 0 18px;
+      font-size: 1.12rem;
+      line-height: 1.4;
+      color: rgba(246, 248, 255, 0.96);
+    }
+
+    .competitor-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .competitor-card {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .competitor-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(1, 137, 255, 0.22), rgba(255, 255, 255, 0.06));
+      border: 1px solid rgba(1, 137, 255, 0.24);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    .competitor-avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .competitor-body strong {
+      display: block;
+      margin: 0 0 7px;
+      font-size: 1rem;
+      line-height: 1.45;
+      color: rgba(246, 248, 255, 0.96);
+    }
+
+    .competitor-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.68;
+    }
+
+    .presence-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 10px 0 24px;
+    }
+
+    .presence-card {
+      width: 100%;
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.018)),
+        linear-gradient(180deg, rgba(1, 98, 182, 0.045), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .method-note {
+      margin: 0 0 28px;
+      padding: 20px 22px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.98rem;
+    }
+
+    .presence-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin-bottom: 26px;
+    }
+
+    .presence-item {
+      display: flex;
+      flex-direction: column;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .presence-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .presence-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(1, 137, 255, 0.22);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+      flex-shrink: 0;
+    }
+
+    .presence-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .presence-item h3 {
+      margin: 0;
+      font-size: 1.16rem;
+      line-height: 1.35;
+      color: rgba(246, 248, 255, 0.97);
+    }
+
+    .presence-summary {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.72;
+      min-height: 10.5rem;
+    }
+
+    .keyword-label {
+      margin: 16px 0 10px;
+      color: rgba(246, 248, 255, 0.9);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .creative-label {
+      margin: 18px 0 12px;
+      color: rgba(246, 248, 255, 0.9);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .creative-carousel {
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .creative-controls {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 2;
+      display: flex;
+      gap: 8px;
+    }
+
+    .creative-button {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(7, 15, 40, 0.88);
+      color: #ffffff;
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: 180ms ease;
+    }
+
+    .creative-button:hover {
+      background: rgba(1, 137, 255, 0.18);
+      border-color: rgba(1, 137, 255, 0.3);
+    }
+
+    .creative-gallery {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(340px, 460px);
+      gap: 16px;
+      overflow-x: auto;
+      padding-right: 84px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+    }
+
+    .creative-gallery::-webkit-scrollbar {
+      display: none;
+    }
+
+    .creative-card {
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      scroll-snap-align: start;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .creative-card img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 0.88 / 1;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .keyword-tags,
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .keyword-tag,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(246, 248, 255, 0.82);
+      font-size: 0.81rem;
+      line-height: 1.2;
+      white-space: normal;
+      word-break: break-word;
+      max-width: 100%;
+    }
+
+    .cluster-card {
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto;
+      gap: 12px;
+    }
+
+    .cluster-copy {
+      min-height: 6.1rem;
+    }
+
+    .cluster-label {
+      margin: 0;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      color: rgba(246, 248, 255, 0.52);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: none;
+    }
+
+    .cluster-card .chip-list {
+      align-items: flex-start;
+      margin: 0;
+    }
+
+    .hypothesis-note {
+      margin-top: 6px;
+      padding: 14px 16px 14px 18px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 3px solid rgba(1, 137, 255, 0.5);
+      color: rgba(246, 248, 255, 0.9);
+      font-size: 0.87rem;
+      line-height: 1.6;
+      box-shadow: none;
+    }
+
+    .hypothesis-note strong {
+      color: #ffffff;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .summary-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .summary-card h3 {
+      margin: 0 0 14px;
+      font-size: 1.14rem;
+      line-height: 1.4;
+      color: rgba(246, 248, 255, 0.97);
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.95rem;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .mini-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(1, 137, 255, 0.1);
+    }
+
+    .split-card {
+      display: grid;
+      gap: 18px;
+    }
+
+    .subhead {
+      margin: 0 0 10px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(246, 248, 255, 0.56);
+    }
+
+    .conclusion-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(1, 137, 255, 0.1), rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(1, 137, 255, 0.22);
+    }
+
+    .conclusion-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.18rem;
+      line-height: 1.4;
+      color: #ffffff;
+    }
+
+    .conclusion-card p {
+      margin: 0 0 14px;
+      color: rgba(246, 248, 255, 0.82);
+      line-height: 1.75;
+      font-size: 0.97rem;
+    }
+
+    .strategy-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 12px 0 40px;
+    }
+
+    .strategy-card {
+      width: 100%;
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
+        linear-gradient(180deg, rgba(1, 137, 255, 0.05), rgba(1, 98, 182, 0.035));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .strategy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(246, 248, 255, 0.82);
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .strategy-head {
+      margin: 22px 0 30px;
+      max-width: none;
+    }
+
+    .strategy-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    .strategy-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 1rem;
+    }
+
+    .strategy-stack {
+      display: grid;
+      gap: 22px;
+    }
+
+    .strategy-subblock {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .strategy-subblock:hover,
+    .campaign-card:hover,
+    .timeline-card:hover,
+    .cluster-card:hover,
+    .metric-card:hover,
+    .signal-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(1, 137, 255, 0.24);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .strategy-subblock h3 {
+      margin: 0 0 14px;
+      font-size: 1.2rem;
+      line-height: 1.35;
+      color: #ffffff;
+    }
+
+    .subblock-copy {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.7;
+    }
+
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .campaign-card,
+    .timeline-card,
+    .cluster-card,
+    .metric-card,
+    .signal-card {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.028);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .campaign-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .campaign-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(1, 137, 255, 0.22), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(1, 137, 255, 0.18);
+      color: #ffffff;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+
+    .campaign-priority {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .campaign-priority.high {
+      color: #a9d6ff;
+      background: rgba(1, 137, 255, 0.12);
+      border-color: rgba(1, 137, 255, 0.24);
+    }
+
+    .campaign-priority.medium {
+      color: #d8ecff;
+      background: rgba(90, 146, 215, 0.12);
+      border-color: rgba(90, 146, 215, 0.24);
+    }
+
+    .campaign-priority.later {
+      color: #d5d9e6;
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .campaign-card h4,
+    .timeline-card h4,
+    .cluster-card h4,
+    .metric-card h4,
+    .signal-card h4 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      line-height: 1.4;
+      color: rgba(246, 248, 255, 0.97);
+    }
+
+    .campaign-card p,
+    .timeline-card p,
+    .cluster-card p,
+    .metric-card p,
+    .signal-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .quiz-accent {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(1, 137, 255, 0.08);
+      border: 1px solid rgba(1, 137, 255, 0.18);
+      color: rgba(246, 248, 255, 0.9);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .timeline-stage {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: rgba(246, 248, 255, 0.92);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 8px rgba(1, 137, 255, 0.12);
+    }
+
+    .timeline-group {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .timeline-mini {
+      padding: 12px 13px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .timeline-mini strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: rgba(246, 248, 255, 0.92);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .timeline-mini span {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .cluster-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .funnel-wrap {
+      display: grid;
+      gap: 18px;
+    }
+
+    .funnel-track {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .funnel-step {
+      position: relative;
+      padding: 16px 12px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: rgba(246, 248, 255, 0.92);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .funnel-step::after {
+      content: "→";
+      position: absolute;
+      right: -11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(1, 137, 255, 0.7);
+      font-size: 1.1rem;
+      z-index: 1;
+    }
+
+    .funnel-step:last-child::after {
+      display: none;
+    }
+
+    .tracking-box {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .tracking-box h4 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: rgba(246, 248, 255, 0.97);
+    }
+
+    .tracking-events {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tracking-event {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(246, 248, 255, 0.82);
+      font-size: 0.84rem;
+      line-height: 1.2;
+    }
+
+    .opt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .traffic-change-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .traffic-change-card {
+      padding: 22px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .traffic-change-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(1, 137, 255, 0.24);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .traffic-change-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .traffic-change-index {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(1, 137, 255, 0.22), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(1, 137, 255, 0.2);
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .traffic-change-card h4 {
+      margin: 0;
+      font-size: 1.02rem;
+      line-height: 1.4;
+      color: rgba(246, 248, 255, 0.97);
+      min-width: 0;
+    }
+
+    .traffic-change-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.72;
+    }
+
+    .metric-list,
+    .signal-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .metric-list li,
+    .signal-list li {
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.94rem;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .metric-list li::before,
+    .signal-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(1, 137, 255, 0.1);
+    }
+
+    @media (max-width: 1040px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 18px 20px 16px;
+      }
+
+      .sidebar-inner {
+        gap: 18px;
+        height: auto;
+      }
+
+      .project-title {
+        font-size: 0.98rem;
+      }
+
+      .progress-nav {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .progress-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .progress-link {
+        flex: 0 0 220px;
+        min-width: 220px;
+      }
+
+      .progress-link.active::before {
+        display: none;
+      }
+
+      .sidebar-note {
+        margin-top: 8px;
+      }
+
+      .content {
+        padding: 24px 20px 40px;
+      }
+    }
+
+    @media (max-width: 880px) {
+      .section,
+      .analysis-section,
+      .presence-section,
+      .strategy-section {
+        min-height: auto;
+        align-items: stretch;
+        padding: 12px 0 20px;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .columns-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .block-head,
+      .strategy-head {
+        margin-bottom: 22px;
+      }
+
+      .block-head h2,
+      .strategy-head h2 {
+        max-width: none;
+      }
+
+      .presence-grid,
+      .summary-grid,
+      .campaign-grid,
+      .timeline-grid,
+      .cluster-grid,
+      .opt-grid,
+      .traffic-change-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .presence-summary {
+        min-height: auto;
+      }
+
+      .funnel-track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .funnel-step {
+        min-height: 84px;
+      }
+
+      .timeline-group {
+        gap: 8px;
+      }
+
+      .funnel-step::after {
+        display: none;
+      }
+
+      .creative-gallery {
+        grid-auto-columns: minmax(300px, 84vw);
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .sidebar {
+        padding: 20px 16px;
+      }
+
+      .project-title {
+        font-size: 0.94rem;
+      }
+
+      .progress-link {
+        flex-basis: 186px;
+        min-width: 186px;
+        padding: 12px 12px 12px 14px;
+      }
+
+      .progress-copy strong {
+        font-size: 0.9rem;
+        line-height: 1.35;
+      }
+
+      .sidebar-note {
+        display: none;
+      }
+
+      .content {
+        padding: 18px 14px 32px;
+      }
+
+      .hero-card {
+        padding: 22px;
+        min-height: 68vh;
+      }
+
+      .analysis-card,
+      .presence-card,
+      .strategy-card {
+        border-radius: 24px;
+      }
+
+      .traffic-change-card {
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .traffic-change-top {
+        display: grid;
+        grid-template-columns: 36px minmax(0, 1fr);
+        align-items: start;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .traffic-change-card h4 {
+        font-size: 0.96rem;
+        line-height: 1.45;
+      }
+
+      .traffic-change-card p {
+        font-size: 0.9rem;
+        line-height: 1.62;
+      }
+
+      .analysis-card,
+      .column-card,
+      .presence-card,
+      .strategy-card,
+      .summary-card,
+      .strategy-subblock,
+      .campaign-card,
+      .timeline-card,
+      .cluster-card,
+      .metric-card,
+      .signal-card,
+      .presence-item,
+      .conclusion-card,
+      .method-note {
+        padding: 22px;
+      }
+
+      .competitor-card {
+        grid-template-columns: 46px minmax(0, 1fr);
+        padding: 14px;
+      }
+
+      .competitor-avatar {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        font-size: 0.88rem;
+      }
+
+      .hero-credit {
+        margin-top: 18px;
+        gap: 8px;
+      }
+
+      .hero-credit-label,
+      .hero-name {
+        font-size: 1rem;
+      }
+
+      .block-head h2,
+      .strategy-head h2 {
+        font-size: clamp(1.8rem, 9vw, 2.4rem);
+      }
+
+      .block-head p,
+      .strategy-head p,
+      .presence-summary,
+      .competitor-body p,
+      .method-note,
+      .conclusion-card p {
+        font-size: 0.93rem;
+        line-height: 1.65;
+      }
+
+      .creative-controls {
+        top: 10px;
+        right: 10px;
+      }
+
+      .creative-button {
+        width: 36px;
+        height: 36px;
+      }
+
+      .creative-gallery {
+        grid-auto-columns: minmax(260px, 86vw);
+        gap: 12px;
+      }
+
+      .funnel-track {
+        grid-template-columns: 1fr;
+      }
+
+      .funnel-step {
+        min-height: auto;
+        padding: 14px 16px;
+      }
+
+      .keyword-tags,
+      .chip-list {
+        gap: 7px;
+      }
+
+      .keyword-tag,
+      .chip {
+        font-size: 0.78rem;
+      }
+
+      .timeline-mini,
+      .hypothesis-note {
+        padding: 12px 14px;
+      }
+
+      .creative-card {
+        border-radius: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div>
+          <div class="sidebar-label">Navigation</div>
+          <div class="project-title">
+            <span class="project-mark"></span>
+            <span>Copymind Test Landing</span>
+          </div>
+        </div>
+
+        <nav class="progress-nav" aria-label="Етапи лендингу">
+          <a class="progress-link active" href="#intro" data-target="intro">
+            <span class="progress-index">01</span>
+            <span class="progress-copy">
+              <strong>Тестове задання для COPYMIND</strong>
+            </span>
+          </a>
+          <a class="progress-link" href="#competitors" data-target="competitors">
+            <span class="progress-index">02</span>
+            <span class="progress-copy">
+              <strong>Аналіз конкурентів у Google-середовищі</strong>
+            </span>
+          </a>
+          <a class="progress-link" href="#ad-presence" data-target="ad-presence">
+            <span class="progress-index">03</span>
+            <span class="progress-copy">
+              <strong>Аналіз рекламної присутності</strong>
+            </span>
+          </a>
+          <a class="progress-link" href="#launch-strategy" data-target="launch-strategy">
+            <span class="progress-index">04</span>
+            <span class="progress-copy">
+              <strong>Стратегія запуску Google Ads для COPYMIND</strong>
+            </span>
+          </a>
+        </nav>
+
+        <div class="sidebar-note">
+          Це меню працює як орієнтир по етапах сторінки: під час прокрутки активний блок буде підсвічуватись, як у навігації по документу.
+        </div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <div class="content-shell">
+        <section class="section" id="intro" data-section="intro">
+          <article class="hero-card">
+            <div class="hero-copy">
+              <div class="eyebrow">
+                <span class="eyebrow-dot"></span>
+                <span>Тестове завдання</span>
+              </div>
+              <h1>
+                <span class="hero-title-line"><span class="title-italic">Тестове</span> <span class="title-strong">задання</span></span>
+                <span class="hero-title-line"><span class="title-italic">для</span> <span class="title-brand">COPYMIND</span></span>
+              </h1>
+              <div class="hero-credit">
+                <span class="hero-credit-label">підготував</span>
+                <span class="hero-name">Ільховський Олександр</span>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="analysis-section" id="competitors" data-section="competitors">
+          <article class="analysis-card">
+            <div class="block-kicker">
+              <span class="eyebrow-dot"></span>
+              <span>Конкуренти</span>
+            </div>
+            <div class="block-head">
+              <h2>Аналіз конкурентів у Google-середовищі</h2>
+              <p>
+                У цьому блоці фіксуємо конкурентне поле: кого можна віднести до прямих конкурентів COPYMIND, а хто закриває близький користувацький сценарій опосередковано через mental well-being, journaling, mindfulness або AI companionship.
+              </p>
+            </div>
+
+            <h3 class="subblock-title">Прямі та непрямі конкуренти</h3>
+
+            <div class="columns-grid">
+              <div class="column-card">
+                <h3>Прямі конкуренти</h3>
+                <div class="competitor-list">
+                  <article class="competitor-card">
+                    <div class="competitor-avatar"><img src="assets/icons/replika.jpg" alt="Replika icon"></div>
+                    <div class="competitor-body">
+                      <strong>Replika</strong>
+                      <p>Займає Google-попит навколо AI companion, AI friend, AI chatbot, personal AI companion. У пошуковій видачі Google та Google Play / App Store продукт позиціонується як персональний AI-співрозмовник. У paid-комунікаціях Google використовує messaging навколо AI companion, спілкування, підтримки та в окремих креативах — практики мов.</p>
+                    </div>
+                  </article>
+
+                  <article class="competitor-card">
+                    <div class="competitor-avatar"><img src="assets/icons/liven.jpg" alt="Liven icon"></div>
+                    <div class="competitor-body">
+                      <strong>Liven</strong>
+                      <p>Покриває інтенти mental health, self-discovery, self-care, mood tracking, self companion. У Google Play / App Store продукт подається як застосунок для самопізнання, трекінгу стану та роботи з поведінковими патернами. У paid-комунікаціях використовує креативи навколо ADHD, hypersexuality, impulsivity, overthinking, emotional patterns і потреби краще зрозуміти себе.</p>
+                    </div>
+                  </article>
+
+                  <article class="competitor-card">
+                    <div class="competitor-avatar"><img src="assets/icons/pi.jpg" alt="Pi icon"></div>
+                    <div class="competitor-body">
+                      <strong>Pi</strong>
+                      <p>Займає напрям personal AI assistant / conversational AI. У пошуку Google продукт асоціюється з персональним AI для діалогу, порад, рефлексії та структурування думок. У paid-комунікаціях використовує теми overwhelmed, need to talk, reflection guide, clarity і допомоги у проговоренні ситуації з AI.</p>
+                    </div>
+                  </article>
+
+                  <article class="competitor-card">
+                    <div class="competitor-avatar"><img src="assets/icons/rosebud.jpg" alt="Rosebud icon"></div>
+                    <div class="competitor-body">
+                      <strong>Rosebud: AI Journal &amp; Diary</strong>
+                      <p>Покриває інтенти AI journal, AI diary, self-reflection app, self-care companion. У Google Play / App Store продукт чітко позиціонується як AI-щоденник для рефлексії, персональних інсайтів і personal growth. У paid-комунікаціях просуває ідею “reflect and grow” — AI-інструмент для саморозуміння, а не просто щоденник.</p>
+                    </div>
+                  </article>
+
+                  <article class="competitor-card">
+                    <div class="competitor-avatar"><img src="assets/icons/wysa.jpg" alt="Wysa icon"></div>
+                    <div class="competitor-body">
+                      <strong>Wysa</strong>
+                      <p>Займає кластер AI mental wellbeing chatbot, stress support, anxiety support, emotional support AI. У Google Play / App Store продукт позиціонується як AI-співрозмовник для емоційної підтримки з опорою на CBT-підходи. Для COPYMIND це прямий конкурент у mental well-being напрямі, але з більш терапевтичною комунікацією.</p>
+                    </div>
+                  </article>
+
+                  <article class="competitor-card">
+                    <div class="competitor-avatar"><img src="assets/icons/sonia.jpg" alt="Sonia AI icon"></div>
+                    <div class="competitor-body">
+                      <strong>Sonia AI</strong>
+                      <p>Позиціонується в Google Play / App Store як AI wellbeing coach, AI mental health assistant, emotional support AI. Перетинається з COPYMIND за семантикою приватної AI-розмови, рефлексії, mental well-being і personal growth. Важлива як менший, але точний конкурент у кластері AI-support.</p>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <div class="column-card">
+                <h3>Непрямі конкуренти</h3>
+                <div class="competitor-list">
+                  <article class="competitor-card">
+                    <div class="competitor-avatar"><img src="assets/icons/headspace.jpg" alt="Headspace icon"></div>
+                    <div class="competitor-body">
+                      <strong>Headspace</strong>
+                      <p>Займає широкий Google-попит за інтентами mental health app, meditation app, mindfulness, stress relief, sleep app. У пошуку Google, Google Play / App Store і paid-комунікаціях продукт продає mental well-being через медитації, сон, стрес і mindfulness-практики. Непрямий конкурент, бо закриває ту саму потребу в емоційній стабілізації, але не через AI Twin або AI-журнал.</p>
+                    </div>
+                  </article>
+
+                  <article class="competitor-card">
+                    <div class="competitor-avatar"><img src="assets/icons/finch.jpg" alt="Finch icon"></div>
+                    <div class="competitor-body">
+                      <strong>Finch: Self-Care Pet</strong>
+                      <p>Сильний конкурент у напрямі self-care app, mood tracker, habit tracker, daily self-care, mental health tracker. У Google Play / App Store продукт позиціонується через гейміфікацію, трекінг настрою, звички та щоденну турботу про себе. Непрямий конкурент, бо забирає self-care попит без AI-співрозмовника як core-функції.</p>
+                    </div>
+                  </article>
+
+                  <article class="competitor-card">
+                    <div class="competitor-avatar"><img src="assets/icons/daylio.jpg" alt="Daylio icon"></div>
+                    <div class="competitor-body">
+                      <strong>Daylio</strong>
+                      <p>Покриває ASO-напрями mood tracker, journal app, diary app, habit tracker. Продукт не є AI-рішенням, але закриває близьку потребу: відстеження настрою, емоційних патернів, звичок і коротких записів. Непрямий конкурент для COPYMIND у кластері self-awareness і mood tracking.</p>
+                    </div>
+                  </article>
+
+                  <article class="competitor-card">
+                    <div class="competitor-avatar"><img src="assets/icons/betterme.jpg" alt="BetterMe icon"></div>
+                    <div class="competitor-body">
+                      <strong>BetterMe: Mental Health</strong>
+                      <p>Працює з інтентами mental health app, mental well-being, meditation, relaxation, self-care у Google Play / App Store. Продукт не конкурує з COPYMIND як AI Twin або AI journal, але займає широкий wellbeing-попит навколо емоційного стану, релаксації та щоденної турботи про себе.</p>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="presence-section" id="ad-presence" data-section="ad-presence">
+          <article class="presence-card">
+            <div class="block-kicker">
+              <span class="eyebrow-dot"></span>
+              <span>Реклама</span>
+            </div>
+            <div class="block-head">
+              <h2>Аналіз рекламної присутності</h2>
+            </div>
+
+            <div class="method-note">
+              Для аналізу рекламної присутності я орієнтувався на видимі оголошення конкурентів у Google Ads Transparency Center, Google Search та візуальних paid-форматах Google. Важливо: Google Ads Transparency Center не показує точні ключові слова, бюджети, ставки або результати кампаній, тому keyword directions нижче — це не підтверджені закуплені ключі, а логічні напрями paid search на основі messaging, лендингів і рекламних креативів.
+            </div>
+
+            <div class="presence-grid">
+              <article class="presence-item">
+                <div class="presence-head">
+                  <div class="presence-icon"><img src="assets/icons/replika.jpg" alt="Replika icon"></div>
+                  <h3>Replika</h3>
+                </div>
+                <p class="presence-summary">
+                  У paid-комунікаціях Google Replika робить акцент на AI companion / AI friend / AI romantic partner. Основні hooks: “AI Romantic Partner”, “Chat with AI Boyfriend”, “Create your personal AI friend”, “Always there to listen and talk”. Окремо тестує напрям AI for learning English, що розширює продукт від emotional companion до utility-use case.
+                </p>
+                <div class="creative-label">Приклади креативів у Google</div>
+                <div class="creative-carousel">
+                  <div class="creative-controls">
+                    <button class="creative-button" type="button" data-carousel-prev aria-label="Попередній креатив">←</button>
+                    <button class="creative-button" type="button" data-carousel-next aria-label="Наступний креатив">→</button>
+                  </div>
+                  <div class="creative-gallery" data-carousel-track>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/replika-creative-1.png" alt="Replika romantic partner ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/replika-creative-2.png" alt="Replika AI boyfriend ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/replika-creative-3.png" alt="Replika search result ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/replika-creative-4.png" alt="Replika English learning ad">
+                    </figure>
+                  </div>
+                </div>
+                <div class="keyword-label">Можливі keywords</div>
+                <div class="keyword-tags">
+                  <span class="keyword-tag">AI companion</span>
+                  <span class="keyword-tag">AI friend</span>
+                  <span class="keyword-tag">AI boyfriend</span>
+                  <span class="keyword-tag">AI girlfriend</span>
+                  <span class="keyword-tag">AI romantic partner</span>
+                  <span class="keyword-tag">virtual companion</span>
+                  <span class="keyword-tag">talk to AI</span>
+                  <span class="keyword-tag">AI for learning English</span>
+                  <span class="keyword-tag">English speaking practice AI</span>
+                </div>
+              </article>
+
+              <article class="presence-item">
+                <div class="presence-head">
+                  <div class="presence-icon"><img src="assets/icons/liven.jpg" alt="Liven icon"></div>
+                  <h3>Liven</h3>
+                </div>
+                <p class="presence-summary">
+                  Liven активно використовує Search і візуальні paid-формати Google. У комунікації заходить не через загальне “mental health app”, а через конкретні болі: procrastination, ADHD, impulsivity, overthinking, emotional patterns. Часто веде користувача у quiz / assessment funnel з hooks на кшталт “Procrastination isn’t laziness” або “Identify your focus patterns”. Для COPYMIND це сильний приклад problem-first подачі.
+                </p>
+                <div class="creative-label">Приклади креативів у Google</div>
+                <div class="creative-carousel">
+                  <div class="creative-controls">
+                    <button class="creative-button" type="button" data-carousel-prev aria-label="Попередній креатив">←</button>
+                    <button class="creative-button" type="button" data-carousel-next aria-label="Наступний креатив">→</button>
+                  </div>
+                  <div class="creative-gallery" data-carousel-track>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/liven-creative-1.png" alt="Liven creative about procrastination">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/liven-creative-2.png" alt="Liven anxiety assessment ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/liven-creative-3.png" alt="Liven depression quiz ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/liven-creative-4.png" alt="Liven sponsored video creative">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/liven-creative-5.png" alt="Liven regulate nervous system ad">
+                    </figure>
+                  </div>
+                </div>
+                <div class="keyword-label">Можливі keywords</div>
+                <div class="keyword-tags">
+                  <span class="keyword-tag">ADHD test</span>
+                  <span class="keyword-tag">procrastination test</span>
+                  <span class="keyword-tag">hypersexuality test</span>
+                  <span class="keyword-tag">self-discovery app</span>
+                  <span class="keyword-tag">mental health quiz</span>
+                  <span class="keyword-tag">focus problems</span>
+                  <span class="keyword-tag">overthinking</span>
+                  <span class="keyword-tag">emotional patterns</span>
+                  <span class="keyword-tag">dopamine reward system</span>
+                </div>
+              </article>
+
+              <article class="presence-item">
+                <div class="presence-head">
+                  <div class="presence-icon"><img src="assets/icons/finch.jpg" alt="Finch icon"></div>
+                  <h3>Finch: Self-Care Pet</h3>
+                </div>
+                <p class="presence-summary">
+                  Finch використовує м’який, trust-based підхід. У visible ads продукт подає себе як self-care app для щоденної турботи про себе, healthy routines і neurodivergent minds. На відміну від Liven, Finch не тисне на гострі стани, а продає дружній і легкий формат self-care.
+                </p>
+                <div class="creative-label">Приклади креативів у Google</div>
+                <div class="creative-carousel">
+                  <div class="creative-controls">
+                    <button class="creative-button" type="button" data-carousel-prev aria-label="Попередній креатив">←</button>
+                    <button class="creative-button" type="button" data-carousel-next aria-label="Наступний креатив">→</button>
+                  </div>
+                  <div class="creative-gallery" data-carousel-track>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/finch-creative-1.png" alt="Finch self care app ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/finch-creative-2.png" alt="Finch made for neurodivergent minds ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/finch-creative-3.png" alt="Finch routines and self-care ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/finch-creative-4.png" alt="Finch expanded search ad">
+                    </figure>
+                  </div>
+                </div>
+                <div class="keyword-label">Можливі keywords</div>
+                <div class="keyword-tags">
+                  <span class="keyword-tag">self-care app</span>
+                  <span class="keyword-tag">mental health tracker</span>
+                  <span class="keyword-tag">mood tracker</span>
+                  <span class="keyword-tag">habit tracker</span>
+                  <span class="keyword-tag">daily self-care</span>
+                  <span class="keyword-tag">neurodivergent self-care</span>
+                  <span class="keyword-tag">healthy routines app</span>
+                </div>
+              </article>
+
+              <article class="presence-item">
+                <div class="presence-head">
+                  <div class="presence-icon"><img src="assets/icons/pi.jpg" alt="Pi icon"></div>
+                  <h3>Pi</h3>
+                </div>
+                <p class="presence-summary">
+                  Pi просувається як personal AI, а не як вузький mental health app. Головний меседж — “Pi, your personal AI”, а комунікація будується навколо supportive AI that listens, helps think, plan and grow. Для COPYMIND це близький paid messaging, але продукт може відбудовуватись через AI Twin, пам’ять про патерни користувача та decision support.
+                </p>
+                <div class="creative-label">Приклади креативів у Google</div>
+                <div class="creative-carousel">
+                  <div class="creative-controls">
+                    <button class="creative-button" type="button" data-carousel-prev aria-label="Попередній креатив">←</button>
+                    <button class="creative-button" type="button" data-carousel-next aria-label="Наступний креатив">→</button>
+                  </div>
+                  <div class="creative-gallery" data-carousel-track>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/pi-creative-1.png" alt="Pi search creative">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/pi-creative-2.png" alt="Pi app store video creative">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/pi-creative-3.png" alt="Pi install creative">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/pi-creative-4.png" alt="Pi emotionally intelligent creative">
+                    </figure>
+                  </div>
+                </div>
+                <div class="keyword-label">Можливі keywords</div>
+                <div class="keyword-tags">
+                  <span class="keyword-tag">personal AI</span>
+                  <span class="keyword-tag">AI assistant</span>
+                  <span class="keyword-tag">AI companion</span>
+                  <span class="keyword-tag">talk to AI</span>
+                  <span class="keyword-tag">AI that listens</span>
+                  <span class="keyword-tag">reflection guide</span>
+                  <span class="keyword-tag">AI for planning</span>
+                  <span class="keyword-tag">AI for personal growth</span>
+                </div>
+              </article>
+
+              <article class="presence-item">
+                <div class="presence-head">
+                  <div class="presence-icon"><img src="assets/icons/rosebud.jpg" alt="Rosebud icon"></div>
+                  <h3>Rosebud: AI Journal &amp; Diary</h3>
+                </div>
+                <p class="presence-summary">
+                  Rosebud просувається через AI journaling, self-reflection і personal growth. Основні hooks: “AI Journal for Personal Growth”, “Journal Anytime, Anyplace”, “Heal Through Journaling”, “From Chaos to Clarity”. CTA переважно веде на trial або install, а комунікація сфокусована на рефлексії та персональних інсайтах.
+                </p>
+                <div class="creative-label">Приклади креативів у Google</div>
+                <div class="creative-carousel">
+                  <div class="creative-controls">
+                    <button class="creative-button" type="button" data-carousel-prev aria-label="Попередній креатив">←</button>
+                    <button class="creative-button" type="button" data-carousel-next aria-label="Наступний креатив">→</button>
+                  </div>
+                  <div class="creative-gallery" data-carousel-track>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/rosebud-creative-1.png" alt="Rosebud heal through journaling ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/rosebud-creative-2.png" alt="Rosebud best AI journaling app ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/rosebud-creative-3.png" alt="Rosebud personal growth ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/rosebud-creative-4.png" alt="Rosebud journal your pain away ad">
+                    </figure>
+                  </div>
+                </div>
+                <div class="keyword-label">Можливі keywords</div>
+                <div class="keyword-tags">
+                  <span class="keyword-tag">AI journal</span>
+                  <span class="keyword-tag">AI diary</span>
+                  <span class="keyword-tag">journaling app</span>
+                  <span class="keyword-tag">self-reflection app</span>
+                  <span class="keyword-tag">personal growth app</span>
+                  <span class="keyword-tag">self-care journal</span>
+                  <span class="keyword-tag">mental health journal</span>
+                  <span class="keyword-tag">healing journal</span>
+                  <span class="keyword-tag">daily reflection app</span>
+                  <span class="keyword-tag">journal for anxiety</span>
+                </div>
+              </article>
+
+              <article class="presence-item">
+                <div class="presence-head">
+                  <div class="presence-icon"><img src="assets/icons/headspace.jpg" alt="Headspace icon"></div>
+                  <h3>Headspace</h3>
+                </div>
+                <p class="presence-summary">
+                  Headspace має одну з найширших paid-присутностей серед непрямих конкурентів. Messaging сфокусований на stress, sleep, mindfulness, anxiety та free trial, а основні формули звучать як “Try Headspace for Free”, “One App for Mental Health” і “Breathe deep, stress less”. Це не AI-конкурент напряму, але дуже сильний гравець на верхньому рівні mental-wellbeing попиту.
+                </p>
+                <div class="creative-label">Приклади креативів у Google</div>
+                <div class="creative-carousel">
+                  <div class="creative-controls">
+                    <button class="creative-button" type="button" data-carousel-prev aria-label="Попередній креатив">←</button>
+                    <button class="creative-button" type="button" data-carousel-next aria-label="Наступний креатив">→</button>
+                  </div>
+                  <div class="creative-gallery" data-carousel-track>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/headspace-creative-1.png" alt="Headspace app install creative">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/headspace-creative-2.png" alt="Headspace free trial ad">
+                    </figure>
+                    <figure class="creative-card">
+                      <img src="assets/creatives/headspace-creative-3.png" alt="Headspace official app sponsored ad">
+                    </figure>
+                  </div>
+                </div>
+                <div class="keyword-label">Можливі keywords</div>
+                <div class="keyword-tags">
+                  <span class="keyword-tag">mental health app</span>
+                  <span class="keyword-tag">meditation app</span>
+                  <span class="keyword-tag">mindfulness app</span>
+                  <span class="keyword-tag">stress relief app</span>
+                  <span class="keyword-tag">anxiety thoughts</span>
+                  <span class="keyword-tag">sleep app</span>
+                  <span class="keyword-tag">guided meditation</span>
+                  <span class="keyword-tag">breathing exercises</span>
+                </div>
+              </article>
+            </div>
+
+            <div class="summary-grid">
+              <article class="summary-card">
+                <h3>Типи кампаній Google Ads, які можуть використовувати конкуренти</h3>
+                <ul class="mini-list">
+                  <li><strong>App campaigns</strong> — для мобільних застосунків конкуренти можуть використовувати App campaigns із фокусом на встановлення застосунку. У таких оголошеннях зазвичай є іконка застосунку, короткий benefit, кнопка Install і перехід у Google Play / App Store.</li>
+                  <li><strong>Search campaigns</strong> — конкуренти використовують текстові оголошення в Google Search під категорійні та проблемні запити: mental health app, self-care app, personal AI, AI companion, ADHD test, meditation app.</li>
+                  <li><strong>Display campaigns</strong> — у Display / GDN конкуренти використовують банери, відео та native-креативи з емоційними hooks. Наприклад, Liven працює через ADHD, procrastination, reward system і hypersexuality; Headspace — через stress, anxious thoughts, breathing і sleep; Pi — через personal AI та supportive AI that listens.</li>
+                  <li><strong>Demand Gen campaigns</strong> — частина візуальних креативів може відповідати логіці Demand Gen: короткі відео, image ads і native-картки для YouTube, Discover, Gmail та Display inventory. Основний фокус — не прямий пошуковий попит, а залучення через емоційний стан або життєву ситуацію користувача.</li>
+                  <li><strong>Performance Max campaigns</strong> — PMax можна розглядати як можливий формат масштабування, оскільки він дозволяє показувати оголошення в різних каналах Google: Search, YouTube, Display, Discover і Gmail. Без доступу до рекламних кабінетів неможливо точно підтвердити, хто саме використовує PMax, але для таких застосунків це логічний тип кампаній на етапі масштабування.</li>
+                </ul>
+              </article>
+
+              <article class="summary-card split-card">
+                <div>
+                  <p class="subhead">Messaging / офери</p>
+                  <div class="chip-list">
+                    <span class="chip">Personalized support</span>
+                    <span class="chip">Emotional relief</span>
+                    <span class="chip">Self-discovery</span>
+                    <span class="chip">Daily routine</span>
+                    <span class="chip">Quiz / test hook</span>
+                    <span class="chip">Free trial / try for free</span>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="subhead">Hooks та CTA</p>
+                  <div class="chip-list">
+                    <span class="chip">“Procrastination isn’t laziness”</span>
+                    <span class="chip">“Find out your ADHD profile”</span>
+                    <span class="chip">“Your reward system”</span>
+                    <span class="chip">“From anxious thoughts to ease”</span>
+                    <span class="chip">“Breathe deep, stress less”</span>
+                    <span class="chip">“Pi, your personal AI”</span>
+                    <span class="chip">“Reflect and grow”</span>
+                    <span class="chip">“Made for neurodivergent minds”</span>
+                    <span class="chip">Take the Test</span>
+                    <span class="chip">Find Out</span>
+                    <span class="chip">Learn More</span>
+                    <span class="chip">Try for Free</span>
+                    <span class="chip">Start Free Trial</span>
+                    <span class="chip">Install</span>
+                    <span class="chip">Visit Site</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <article class="conclusion-card">
+              <h3>Висновок для COPYMIND</h3>
+              <p>
+                Для COPYMIND найбільш релевантною виглядає логіка quiz-механіки, яку використовує Liven: вона знижує бар’єр входу, дає користувачу відчуття персоналізації ще до реєстрації та дозволяє заходити в комунікацію через конкретний стан або проблему. У paid-комунікації конкуренти загалом рідко продають просто “додаток” — вони продають overthinking, anxiety, procrastination, emotional chaos, lack of focus, need to talk або desire to understand yourself. Для COPYMIND це означає, що рекламну комунікацію варто будувати не тільки навколо “AI Twin”, а навколо зрозумілих user problems: “розібратися в думках”, “прийняти рішення”, “побачити свої патерни”, “отримати приватний простір для рефлексії”, “мати AI, який пам’ятає твій контекст”.
+              </p>
+              <div class="chip-list">
+                <span class="chip">AI companion / personal AI</span>
+                <span class="chip">AI journal / self-reflection</span>
+                <span class="chip">decision-making / clarity</span>
+                <span class="chip">overthinking / organize thoughts</span>
+                <span class="chip">self-discovery / personal growth</span>
+                <span class="chip">private emotional support</span>
+                <span class="chip">daily reflections</span>
+                <span class="chip">mood and pattern tracking</span>
+              </div>
+              <p style="margin-top: 14px;">
+                У креативах COPYMIND може відбудовуватися від конкурентів через ідею не просто “mental health app” або “AI chatbot”, а <strong>персонального AI Twin, який пам’ятає контекст користувача, допомагає бачити патерни, приймати рішення і щодня краще розуміти себе</strong>.
+              </p>
+            </article>
+          </article>
+        </section>
+
+        <section class="strategy-section" id="launch-strategy" data-section="launch-strategy">
+          <article class="strategy-card">
+            <div class="strategy-badge">
+              <span class="eyebrow-dot"></span>
+              <span>Google Ads Strategy</span>
+            </div>
+
+            <div class="strategy-head">
+              <h2>Стратегія запуску Google Ads для COPYMIND</h2>
+              <p>Стратегія запуску з урахуванням quiz landing: від першого кліку до проходження квізу, реєстрації, оплати та встановлення застосунку.</p>
+            </div>
+
+            <div class="strategy-stack">
+              <article class="strategy-subblock">
+                <h3>Quiz funnel tracking</h3>
+                <div class="funnel-wrap">
+                  <div class="funnel-track">
+                    <div class="funnel-step">Ad click</div>
+                    <div class="funnel-step">quiz start</div>
+                    <div class="funnel-step">quiz progress 25% / 50% / 75%</div>
+                    <div class="funnel-step">quiz complete</div>
+                    <div class="funnel-step">result view</div>
+                    <div class="funnel-step">signup</div>
+                    <div class="funnel-step">payment</div>
+                    <div class="funnel-step">app install / activation</div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="strategy-subblock">
+                <h3>Пріоритет запуску</h3>
+                <div class="timeline-grid">
+                  <article class="timeline-card">
+                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Етап 1</span></div>
+                    <h4>Search + Brand Search</h4>
+                    <div class="timeline-group">
+                      <div class="timeline-mini">
+                        <strong>Ціль етапу</strong>
+                        <span>Перевірити Search по конкретних частотних пошукових запитах, релевантних до COPYMIND, і зрозуміти, наскільки дорогим може бути прямий пошуковий трафік.</span>
+                      </div>
+                      <div class="timeline-mini">
+                        <strong>Які сигнали перевіряємо</strong>
+                        <span>CPC, CTR, search intent quality, quiz start rate, quiz completion rate і потенційну вартість трафіку з прямого пошуку.</span>
+                      </div>
+                      <div class="timeline-mini">
+                        <strong>Які кампанії запускаємо</strong>
+                        <span>Search і Brand Search як базу для першої перевірки попиту, вартості кліка і якості трафіку на quiz landing.</span>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="timeline-card">
+                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Етап 2</span></div>
+                    <h4>Video / YouTube + Demand Gen + Performance Max</h4>
+                    <div class="timeline-group">
+                      <div class="timeline-mini">
+                        <strong>Ціль етапу</strong>
+                        <span>Розширити охоплення і протестувати video-first storytelling, Demand Gen та ширший multi-channel показ для quiz funnel.</span>
+                      </div>
+                      <div class="timeline-mini">
+                        <strong>Які сигнали перевіряємо</strong>
+                        <span>Engagement з відео, cost per quiz complete, signup rate після results page, стабільність сигналів у ширшому охопленні.</span>
+                      </div>
+                      <div class="timeline-mini">
+                        <strong>Які кампанії запускаємо</strong>
+                        <span>YouTube / Video, Demand Gen і Performance Max на вже підтверджених комунікаційних напрямах.</span>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="timeline-card">
+                    <div class="timeline-stage"><span class="timeline-dot"></span><span>Етап 3</span></div>
+                    <h4>App campaigns</h4>
+                    <div class="timeline-group">
+                      <div class="timeline-mini">
+                        <strong>Ціль етапу</strong>
+                        <span>Тестувати трафік одразу в застосунок, де користувач проходить quiz вже всередині app flow, і порівняти якість цього сценарію з web quiz funnel.</span>
+                      </div>
+                      <div class="timeline-mini">
+                        <strong>Які сигнали перевіряємо</strong>
+                        <span>Install rate, cost per install, quiz start rate, quiz completion rate, activation rate і якість користувача після проходження квізу в app flow.</span>
+                      </div>
+                      <div class="timeline-mini">
+                        <strong>Які кампанії запускаємо</strong>
+                        <span>App campaigns як окремий формат для прямого тестування install traffic, де ключова подія так само зав’язана на проходження квізу, але вже всередині застосунку.</span>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </article>
+
+              <article class="strategy-subblock">
+                <h3>Теми для ключів і перших креативних гіпотез</h3>
+                <div class="cluster-grid">
+                  <article class="cluster-card">
+                    <h4>Private reflection / organize thoughts</h4>
+                    <p class="cluster-copy">Більш точний для COPYMIND кластер: приватний простір для думок, рефлексії та розкладання внутрішнього хаосу без позиціонування як journal.</p>
+                    <p class="cluster-label">Теми для ключів</p>
+                    <div class="chip-list">
+                      <span class="chip">private reflection</span>
+                      <span class="chip">organize thoughts</span>
+                      <span class="chip">clarify emotions</span>
+                      <span class="chip">reflect with AI</span>
+                      <span class="chip">private space to think</span>
+                    </div>
+                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “Think privately. See your thoughts clearer.”</div>
+                  </article>
+
+                  <article class="cluster-card">
+                    <h4>AI companion / personal AI</h4>
+                    <p class="cluster-copy">Тема для запуску через персонального AI-співрозмовника, який слухає, пам’ятає контекст і допомагає розібратися з думками.</p>
+                    <p class="cluster-label">Теми для ключів</p>
+                    <div class="chip-list">
+                      <span class="chip">AI companion</span>
+                      <span class="chip">personal AI</span>
+                      <span class="chip">AI friend</span>
+                      <span class="chip">talk to AI</span>
+                      <span class="chip">AI that listens</span>
+                    </div>
+                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “Your personal AI for thinking out loud”</div>
+                  </article>
+
+                  <article class="cluster-card">
+                    <h4>Decision clarity</h4>
+                    <p class="cluster-copy">Кластер для користувачів, яким складно приймати рішення, упорядковувати думки та знаходити ясність у перевантаженому стані.</p>
+                    <p class="cluster-label">Теми для ключів</p>
+                    <div class="chip-list">
+                      <span class="chip">decision clarity</span>
+                      <span class="chip">organize thoughts</span>
+                      <span class="chip">AI for decisions</span>
+                      <span class="chip">clarity app</span>
+                      <span class="chip">thinking support</span>
+                    </div>
+                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “From chaos to clarity”</div>
+                  </article>
+
+                  <article class="cluster-card">
+                    <h4>Self-discovery / personal growth</h4>
+                    <p class="cluster-copy">Підхід через самопізнання, personal growth і пошук повторюваних патернів, які пояснюють реакції, емоції та поведінку.</p>
+                    <p class="cluster-label">Теми для ключів</p>
+                    <div class="chip-list">
+                      <span class="chip">self-discovery app</span>
+                      <span class="chip">personal growth app</span>
+                      <span class="chip">understand yourself</span>
+                      <span class="chip">reflection guide</span>
+                      <span class="chip">personal insights</span>
+                    </div>
+                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “See your patterns, know yourself better”</div>
+                  </article>
+
+                  <article class="cluster-card">
+                    <h4>Mood / patterns</h4>
+                    <p class="cluster-copy">Тема для креативів, де COPYMIND допомагає відслідковувати емоційні цикли, щоденний стан і повторювані thought patterns.</p>
+                    <p class="cluster-label">Теми для ключів</p>
+                    <div class="chip-list">
+                      <span class="chip">mood tracking</span>
+                      <span class="chip">emotional patterns</span>
+                      <span class="chip">thought patterns</span>
+                      <span class="chip">pattern tracking</span>
+                      <span class="chip">daily mood check</span>
+                    </div>
+                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “Track moods. Spot patterns. Reflect smarter.”</div>
+                  </article>
+
+                  <article class="cluster-card">
+                    <h4>Mental well-being</h4>
+                    <p class="cluster-copy">Вхід через м’який mental well-being angle: overthinking, stress reflection, приватна емоційна підтримка без жорсткої терапевтичної рамки.</p>
+                    <p class="cluster-label">Теми для ключів</p>
+                    <div class="chip-list">
+                      <span class="chip">mental well-being app</span>
+                      <span class="chip">overthinking help</span>
+                      <span class="chip">private emotional support</span>
+                      <span class="chip">stress reflection</span>
+                      <span class="chip">mind clarity</span>
+                    </div>
+                    <div class="hypothesis-note"><strong>Перша гіпотеза</strong>: “A private space to think and feel clearer”</div>
+                  </article>
+                </div>
+              </article>
+
+              <article class="strategy-subblock">
+                <h3>Optimization mindset</h3>
+                <div class="opt-grid">
+                  <article class="metric-card">
+                    <h4>Метрики перших 30 днів</h4>
+                    <ul class="metric-list">
+                      <li>CTR</li>
+                      <li>CPC</li>
+                      <li>quiz start rate</li>
+                      <li>quiz completion rate</li>
+                      <li>cost per quiz complete</li>
+                      <li>result page view rate</li>
+                      <li>signup rate</li>
+                      <li>payment start rate</li>
+                      <li>purchase rate</li>
+                      <li>CAC</li>
+                      <li>install / activation rate</li>
+                    </ul>
+                  </article>
+
+                  <article class="signal-card">
+                    <h4>Сигнали для масштабування</h4>
+                    <ul class="signal-list">
+                      <li>низький cost per quiz complete</li>
+                      <li>високий quiz completion rate</li>
+                      <li>хороший signup rate після results page</li>
+                      <li>стабільний payment start / purchase rate</li>
+                      <li>якісна активація після встановлення</li>
+                    </ul>
+                  </article>
+                </div>
+              </article>
+
+              <article class="strategy-subblock">
+                <h3>Які зміни внесли б під Google traffic</h3>
+                <div class="traffic-change-grid">
+                  <article class="traffic-change-card">
+                    <div class="traffic-change-top">
+                      <div class="traffic-change-index">01</div>
+                      <h4>Розділити quiz landing під різні інтенти</h4>
+                    </div>
+                    <p>
+                      Користувач із запиту <strong>AI journal</strong> має бачити квіз про рефлексію та персональні інсайти. Користувач із запиту <strong>AI companion</strong> — про персонального AI-співрозмовника. Користувач із запиту <strong>decision making app / overthinking</strong> — про ясність, рішення та структурування думок.
+                    </p>
+                  </article>
+
+                  <article class="traffic-change-card">
+                    <div class="traffic-change-top">
+                      <div class="traffic-change-index">02</div>
+                      <h4>Перший екран квізу має повторювати меседж реклами</h4>
+                    </div>
+                    <p>
+                      Якщо в оголошенні hook <strong>“Too many thoughts at once?”</strong>, то перший екран не має починатися з загального <strong>“Meet your AI Twin”</strong>. Краще: <strong>“Find out how your mind processes decisions”</strong> або <strong>“Discover what drives your overthinking patterns”</strong>.
+                    </p>
+                  </article>
+                </div>
+              </article>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll("[data-section]");
+    const links = document.querySelectorAll(".progress-link");
+    const carousels = document.querySelectorAll(".creative-carousel");
+
+    const activateLink = (id) => {
+      links.forEach((link) => {
+        link.classList.toggle("active", link.dataset.target === id);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            activateLink(entry.target.dataset.section);
+          }
+        });
+      },
+      {
+        threshold: 0.45,
+        rootMargin: "-10% 0px -35% 0px"
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    carousels.forEach((carousel) => {
+      const track = carousel.querySelector("[data-carousel-track]");
+      const prev = carousel.querySelector("[data-carousel-prev]");
+      const next = carousel.querySelector("[data-carousel-next]");
+
+      if (!track || !prev || !next) return;
+
+      const getStep = () => {
+        const firstCard = track.querySelector(".creative-card");
+        if (!firstCard) return 320;
+        const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0);
+        return firstCard.getBoundingClientRect().width + gap;
+      };
+
+      prev.addEventListener("click", () => {
+        track.scrollBy({ left: -getStep(), behavior: "smooth" });
+      });
+
+      next.addEventListener("click", () => {
+        track.scrollBy({ left: getStep(), behavior: "smooth" });
+      });
+    });
+  </script>
+</body>
+</html>
